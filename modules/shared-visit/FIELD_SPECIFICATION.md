@@ -1,9 +1,9 @@
 # Shared Visit — Precise Field-Level Specification v1.0
 
-Status: APPROVED FOR IMPLEMENTATION
+Status: FROZEN
 Architecture: Shared Visit — Architecture & Information Model v1.0
-Figma Implementation: NOT YET IMPLEMENTED
-Figma Changes: NONE
+Figma Implementation: COMPLETE
+Canonical Figma Node: `256:1303`
 
 ## 1. Purpose
 
@@ -21,7 +21,7 @@ These are canonical demonstration values only and must not be hardcoded into reu
 - Chair: `Chair 02`
 - Current Visit State: `In Treatment`
 
-Canonical Visit ID and Visit Date are now explicitly resolved for the Phase 1 demonstration scenario.
+Canonical Visit ID and Visit Date are explicitly resolved for the Phase 1 demonstration scenario.
 
 ## 3. Seven-Region Architecture
 
@@ -224,9 +224,8 @@ PASS requires:
 - no design-system modification
 - no clipping, overlap, or overflow
 
-## 21. Freeze Gate
+## 21. Freeze Gate — SATISFIED
 
-Before freeze:
 - Architecture: APPROVED
 - Field Specification: APPROVED
 - Figma Pre-flight: PASS
@@ -238,12 +237,24 @@ Before freeze:
 - P2: NONE
 - P3: NONE
 
-## 22. Current Status
+## 22. Freeze Record
 
-Architecture: APPROVED
-Field Specification: APPROVED FOR IMPLEMENTATION
+The Phase 1 implementation is frozen at Figma node `256:1303`.
+
+A P1 containment correction was applied before the final audit; six local regions were changed to content-hugging vertical Auto Layout. The subsequent Structural QA / Visual & UX re-audit passed with all canonical content visible and no clipping, overlap, or horizontal overflow.
+
+Repository freeze status: FROZEN.
+
+A frozen Shared Visit Phase 1 field specification may only be changed after an explicit Architecture Exception is authorized.
+
+## 23. Current Status
+
+Architecture: FROZEN
+Field Specification: FROZEN
 Canonical Visit ID: `V-000128`
 Canonical Visit Date: `August 11, 2026`
-Figma: NOT IMPLEMENTED
-Freeze: NOT READY
-Figma Changes: NONE
+Figma: IMPLEMENTED
+Structural QA: PASS
+Visual / UX Audit: PASS
+Freeze: FROZEN
+Figma Changes: COMPLETE
