@@ -5,13 +5,39 @@
 2. Patient Registration
 3. Dental Chart — Phase 1 — Canonical
 4. Treatment Planning — Phase 1 — Canonical
-5. Clinical Workspace — Phase 1
-6. Clinical Closure — Phase 1 — Canonical
-7. Shared Visit — Phase 1 — Canonical
+5. Clinical Closure — Phase 1 — Canonical
+6. Shared Visit — Phase 1 — Canonical
+7. Performed Procedure — Phase 1 — Canonical
+8. Clinical Record History — Phase 1
 
-## Legacy frozen frames
-- Dental Chart — Phase 1 — `127:1110`
-- Treatment Planning — Phase 1 — `136:1124`
+## Clinical Workspace — architecture replacement
+Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception has now been authorized to replace/update its source of truth with the newly approved Clinical Workspace Phase 1 architecture and field specification.
+
+Architecture Exception: APPROVED
+Previous frozen source: `modules/clinical-workspace/ARCHITECTURE.md` and `modules/clinical-workspace/FIELD_SPECIFICATION.md`
+Replacement source of truth: current approved files at the same paths
+Figma implementation: NOT IMPLEMENTED under replacement architecture
+Figma pre-flight: NOT STARTED
+Freeze: NOT READY
+
+The previous Clinical Workspace Figma composition remains protected until the replacement implementation is separately authorized by pre-flight. No Figma change is implied by this repository update.
+
+## Clinical Workspace — approved Phase 1 source of truth
+Architecture: APPROVED
+Field Specification: APPROVED
+Canonical composition: `Clinical Workspace — Phase 1 — Canonical`
+Recommended width: 920 px
+Seven regions:
+1. Workspace Header
+2. Patient & Visit Context
+3. Active Treatment
+4. Clinical Assessment
+5. Treatment Plan Context
+6. Clinical Work & Documentation
+7. Workspace Actions
+
+Sole authorized action: `Save Clinical Notes`.
+Insurance is explicitly excluded.
 
 ## Design-system dependencies
 ### Functional Select Field v1.2
@@ -27,25 +53,8 @@ Architecture: APPROVED
 Field Specification: APPROVED
 Implementation: COMPLETE
 Visual/UX Audit: PASS
-P0 Findings: NONE
-P1 Findings: NONE
-P2 Findings: NONE
-P3 Findings: NONE
 Freeze: FROZEN
-
-Clinical Closure canonical frame: `220:1294`
-
-The Closure Outcome uses the Functional Select Field with exactly four
-consumer-configured outcomes:
-1. Completed as Planned
-2. Completed with Modification
-3. Not Completed
-4. Treatment Continues
-
-`Treatment Continues` remains a local closure outcome and does not imply
-treatment completion, procedure completion, visit completion, history
-creation, Dental Chart mutation, billing, insurance, or cross-module
-navigation.
+Canonical frame: `220:1294`
 
 ## Shared Visit
 Architecture: APPROVED
@@ -55,48 +64,29 @@ Canonical Visit Date: `August 11, 2026`
 Implementation: COMPLETE
 Structural QA: PASS
 Visual/UX Audit: PASS
-P0 Findings: NONE
-P1 Findings: NONE
-P2 Findings: NONE
-P3 Findings: NONE
 Freeze: FROZEN
+Canonical composition: `256:1303`
 
-Canonical Shared Visit composition: `256:1303`
+## Performed Procedure
+Architecture: APPROVED
+Field Specification: APPROVED
+Implementation: COMPLETE
+Visual/UX Audit: PASS
+Freeze: FROZEN
+Canonical composition: `260:2`
 
-Canonical demonstration data:
-- Patient: `Maria Santos`
-- Patient ID: `P-000128`
-- Visit ID: `V-000128`
-- Visit Date: `August 11, 2026`
-- Visit Type: `General Consultation`
-- Chair: `Chair 02`
-- Current Visit State: `In Treatment`
-
-Shared Visit owns the visit lifecycle and current visit state. It does
-not own treatment status, clinical documentation, performed procedures,
-closure outcomes, clinical history, billing, insurance, appointment
-management, or queue management.
-
-Approved lifecycle:
-Scheduled → Checked In → Waiting → Called → In Treatment → Ready for Closure → Closed
-
-The canonical screen is in `In Treatment`, with `Ready for Closure` as the
-only active Phase 1 lifecycle action. No cross-module navigation is authorized.
-
-The Phase 1 implementation initially required a P1 containment correction;
-the six affected local regions were changed to content-hugging vertical Auto
-Layout, followed by a successful Structural QA / Visual & UX re-audit with
-no P0/P1/P2/P3 findings.
-
-Repository source-of-truth files:
-- `modules/shared-visit/ARCHITECTURE.md`
-- `modules/shared-visit/FIELD_SPECIFICATION.md`
+## Clinical Record History
+Architecture: APPROVED
+Field Specification: APPROVED
+Implementation: COMPLETE
+Visual/UX Audit: PASS
+Freeze: FROZEN
+Canonical composition: `153:1204`
 
 ## Repository / Figma boundary
-- Shared Visit Phase 1 is now formally frozen in the repository.
-- Clinical Closure Phase 1 remains frozen at `220:1294`.
-- Functional Select Field v1.2 remains a frozen design-system dependency.
 - Frozen modules require an explicit Architecture Exception before modification.
+- The Clinical Workspace exception is now explicitly authorized for source-of-truth replacement and subsequent bounded Figma adoption.
+- No Figma changes, repository freeze, or module freeze are implied by this exception update.
 
-## Next module
-Proceed to the next authorized module after confirming the repository working tree is clean and the Shared Visit freeze is recorded.
+## Next step
+Run the strict Clinical Workspace Phase 1 Figma pre-flight against the replacement source of truth. If pre-flight passes, implementation may proceed only within its authorized boundary.
