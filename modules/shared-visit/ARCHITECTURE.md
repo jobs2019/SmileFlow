@@ -1,8 +1,9 @@
 # Shared Visit — Architecture & Information Model v1.0
 
-Status: APPROVED FOR FIELD SPECIFICATION
-Figma Implementation: NOT YET IMPLEMENTED
-Figma Changes: NONE
+Status: FROZEN
+Figma Implementation: COMPLETE
+Figma Changes: Phase 1 canonical composition implemented and frozen
+Canonical Figma Node: `256:1303`
 
 ## 1. Module Identity
 
@@ -145,6 +146,7 @@ The following remain frozen:
 - Legacy Treatment Planning — Phase 1
 - Clinical Workspace — Phase 1
 - Clinical Closure — Phase 1 — Canonical
+- Shared Visit — Phase 1 — Canonical (`256:1303`)
 
 ## 12. Phase 1 Non-Goals
 
@@ -152,17 +154,42 @@ Appointment scheduling, appointment management, queue management, billing, insur
 
 ## 13. Implementation Gate
 
-Before Figma implementation:
+The implementation gates were satisfied:
 1. Field specification approved.
 2. Canonical Visit ID established.
 3. Canonical Visit Date established.
 4. Strict Codex implementation prompt generated.
-5. Figma pre-flight passes.
+5. Figma pre-flight passed.
+6. Implementation passed.
+7. Structural QA passed.
+8. Visual / UX audit passed.
 
-## 14. Current Status
+## 14. Freeze Record
 
-Architecture: APPROVED FOR FIELD SPECIFICATION
-Field Specification: NEXT
-Figma: NOT IMPLEMENTED
-Freeze: NOT READY
-Figma Changes: NONE
+Phase 1 canonical composition:
+- Figma node: `256:1303`
+- Root width: `920 px`
+- Layout: vertical Auto Layout
+- Seven top-level regions: verified
+- Structural QA: PASS
+- Visual / UX Audit: PASS
+- P0: NONE
+- P1: NONE
+- P2: NONE
+- P3: NONE
+
+A P1 containment correction was applied before final audit: six affected local regions were changed to content-hugging vertical Auto Layout. The Visit Lifecycle region was intentionally preserved. The subsequent re-audit confirmed complete visibility, no clipping, no overlap, and no horizontal overflow.
+
+Repository freeze status: FROZEN.
+
+A frozen Shared Visit Phase 1 composition may only be changed after an explicit Architecture Exception is authorized.
+
+## 15. Current Status
+
+Architecture: FROZEN
+Field Specification: FROZEN
+Figma: IMPLEMENTED
+Structural QA: PASS
+Visual / UX Audit: PASS
+Freeze: FROZEN
+Figma Changes: COMPLETE
