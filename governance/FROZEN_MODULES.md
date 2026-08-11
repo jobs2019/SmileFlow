@@ -6,6 +6,8 @@
 - Dental Chart — Phase 1 — Canonical — FROZEN
 - Treatment Planning — Phase 1 — Canonical (`198:1290`) — FROZEN
 - Clinical Workspace — Phase 1 (`207:1291`) — FROZEN
+- Clinical Closure — Phase 1 — Canonical (`220:1294`) — FROZEN
+- Shared Visit — Phase 1 — Canonical (`256:1303`) — FROZEN
 
 ## Legacy modules
 - Dental Chart — Phase 1 (`127:1110`) — FROZEN
