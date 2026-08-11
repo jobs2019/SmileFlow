@@ -46,12 +46,45 @@ treatment completion, procedure completion, visit completion, history
 creation, Dental Chart mutation, billing, insurance, or cross-module
 navigation.
 
+## Shared Visit
+Architecture: APPROVED
+Field Specification: APPROVED
+Canonical Visit ID: `V-000128`
+Canonical Visit Date: `August 11, 2026`
+Implementation: NOT YET IMPLEMENTED
+Visual/UX Audit: NOT PERFORMED
+Freeze: NOT READY
+
+Canonical demonstration data:
+- Patient: `Maria Santos`
+- Patient ID: `P-000128`
+- Visit ID: `V-000128`
+- Visit Date: `August 11, 2026`
+- Visit Type: `General Consultation`
+- Chair: `Chair 02`
+- Current Visit State: `In Treatment`
+
+Shared Visit owns the visit lifecycle and current visit state. It does
+not own treatment status, clinical documentation, performed procedures,
+closure outcomes, clinical history, billing, insurance, appointment
+management, or queue management.
+
+Approved lifecycle:
+Scheduled → Checked In → Waiting → Called → In Treatment → Ready for Closure → Closed
+
+The canonical Phase 1 action from `In Treatment` is `Ready for Closure`.
+No cross-module navigation is authorized.
+
+Repository source-of-truth files:
+- `modules/shared-visit/ARCHITECTURE.md`
+- `modules/shared-visit/FIELD_SPECIFICATION.md`
+
 ## Repository / Figma boundary
 - Figma changes are complete for the approved Clinical Closure Phase 1 scope.
-- No further Clinical Closure Figma changes should be made unless a new
-  correction or scope is explicitly authorized.
-- Treat the Functional Select Field v1.2 as a frozen design-system dependency.
+- Functional Select Field v1.2 remains a frozen design-system dependency.
+- Shared Visit Figma implementation is not yet authorized beyond successful pre-flight.
+- No Shared Visit Figma nodes have been created or modified.
 
 ## Next module
-Proceed to the next module's Architecture & Information Model v1.0 only
-after this repository state is committed and validated.
+Shared Visit is the current implementation target.
+Next step: run the strict Shared Visit Phase 1 Figma pre-flight, then implement only if pre-flight passes.
