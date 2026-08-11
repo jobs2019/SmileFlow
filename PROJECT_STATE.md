@@ -7,6 +7,7 @@
 4. Treatment Planning — Phase 1 — Canonical
 5. Clinical Workspace — Phase 1
 6. Clinical Closure — Phase 1 — Canonical
+7. Shared Visit — Phase 1 — Canonical
 
 ## Legacy frozen frames
 - Dental Chart — Phase 1 — `127:1110`
@@ -30,7 +31,7 @@ P0 Findings: NONE
 P1 Findings: NONE
 P2 Findings: NONE
 P3 Findings: NONE
-Freeze: READY TO FREEZE
+Freeze: FROZEN
 
 Clinical Closure canonical frame: `220:1294`
 
@@ -51,9 +52,16 @@ Architecture: APPROVED
 Field Specification: APPROVED
 Canonical Visit ID: `V-000128`
 Canonical Visit Date: `August 11, 2026`
-Implementation: NOT YET IMPLEMENTED
-Visual/UX Audit: NOT PERFORMED
-Freeze: NOT READY
+Implementation: COMPLETE
+Structural QA: PASS
+Visual/UX Audit: PASS
+P0 Findings: NONE
+P1 Findings: NONE
+P2 Findings: NONE
+P3 Findings: NONE
+Freeze: FROZEN
+
+Canonical Shared Visit composition: `256:1303`
 
 Canonical demonstration data:
 - Patient: `Maria Santos`
@@ -72,19 +80,23 @@ management, or queue management.
 Approved lifecycle:
 Scheduled → Checked In → Waiting → Called → In Treatment → Ready for Closure → Closed
 
-The canonical Phase 1 action from `In Treatment` is `Ready for Closure`.
-No cross-module navigation is authorized.
+The canonical screen is in `In Treatment`, with `Ready for Closure` as the
+only active Phase 1 lifecycle action. No cross-module navigation is authorized.
+
+The Phase 1 implementation initially required a P1 containment correction;
+the six affected local regions were changed to content-hugging vertical Auto
+Layout, followed by a successful Structural QA / Visual & UX re-audit with
+no P0/P1/P2/P3 findings.
 
 Repository source-of-truth files:
 - `modules/shared-visit/ARCHITECTURE.md`
 - `modules/shared-visit/FIELD_SPECIFICATION.md`
 
 ## Repository / Figma boundary
-- Figma changes are complete for the approved Clinical Closure Phase 1 scope.
+- Shared Visit Phase 1 is now formally frozen in the repository.
+- Clinical Closure Phase 1 remains frozen at `220:1294`.
 - Functional Select Field v1.2 remains a frozen design-system dependency.
-- Shared Visit Figma implementation is not yet authorized beyond successful pre-flight.
-- No Shared Visit Figma nodes have been created or modified.
+- Frozen modules require an explicit Architecture Exception before modification.
 
 ## Next module
-Shared Visit is the current implementation target.
-Next step: run the strict Shared Visit Phase 1 Figma pre-flight, then implement only if pre-flight passes.
+Proceed to the next authorized module after confirming the repository working tree is clean and the Shared Visit freeze is recorded.
