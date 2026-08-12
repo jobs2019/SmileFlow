@@ -1,7 +1,7 @@
 # Clinical Workspace — Status
 
 ## Current status
-REPLACEMENT ARCHITECTURE APPROVED — Figma replacement implementation COMPLETE
+REPLACEMENT ARCHITECTURE APPROVED — Figma replacement implementation COMPLETE — FROZEN
 
 ## Canonical composition under replacement architecture
 `Clinical Workspace — Phase 1 — Canonical`
@@ -18,7 +18,7 @@ It is not the source of truth for the replacement implementation and remains unt
 - Replacement implementation: COMPLETE
 - Structural QA: PASS
 - Visual & UX Audit: PASS
-- Freeze: NOT FROZEN
+- Freeze: FROZEN
 
 ## Replacement implementation
 - Figma file: SmileFlow Foundations v1.0
@@ -52,4 +52,6 @@ The sole authorized action is `Save Clinical Notes`.
 Insurance, billing, scheduling, queue management, Dental Chart mutation, Treatment Planning mutation, procedure finalization, and visit closure remain excluded.
 
 ## Freeze
-Clinical Workspace is **NOT FROZEN**. Freeze requires separate explicit authorization after the replacement implementation and audits have been accepted.
+Clinical Workspace — Phase 1 — Canonical (`328:1919`) is **FROZEN**.
+
+Any future modification requires an explicit Architecture Exception and new implementation authorization.
