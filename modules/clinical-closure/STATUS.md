@@ -1,11 +1,13 @@
 # Clinical Closure — Status
 
 ## Current status
-**CANONICAL IMPLEMENTATION VERIFIED — QA PASS — NOT FROZEN**
+**CANONICAL IMPLEMENTATION VERIFIED — QA RE-RUN REQUIRED — NOT FROZEN**
 
 ## Authority
 - Architecture: APPROVED
 - Field Specification v1.0: APPROVED — Phase 1 source of truth
+- Field Specification v1.1 Amendment: APPROVED — prototype-only behavior clarification
+- Effective specification: `FIELD_SPECIFICATION.md` v1.0 + `FIELD_SPECIFICATION_V1.1_AMENDMENT.md`
 - Figma Preflight: PASS
 - Canonical implementation: `331:1366`
 
@@ -21,7 +23,7 @@ Current canonical implementation:
 - Node: `331:1366`
 - Dimensions: `920 × 1376 px`
 
-Status: **CANONICAL — IMPLEMENTED — QA PASS — NOT FROZEN**
+Status: **CANONICAL — IMPLEMENTED — QA RE-RUN REQUIRED — NOT FROZEN**
 
 ## Gate status
 
@@ -30,11 +32,13 @@ Status: **CANONICAL — IMPLEMENTED — QA PASS — NOT FROZEN**
 - Gate 3 — Exact-Name Conflict: PASS
 - Gate 4 — Canonical Implementation Verification: PASS
 - Gate 5 — Repository Synchronization: PASS
+- Specification v1.1 amendment: PASS
+- Final QA: **RE-RUN REQUIRED**
 - Freeze: NOT AUTHORIZED
 
 ## Local prototype validation
 
-Validation artifacts remain retained for QA evidence:
+Validation artifacts remain retained as QA evidence:
 
 - `Clinical Closure — Phase 1 — v1.0 — Prototype — Saved` — `333:1708`
 - `Clinical Closure — Phase 1 — v1.0 — Prototype — Cancelled` — `333:1784`
@@ -42,6 +46,25 @@ Validation artifacts remain retained for QA evidence:
 Outcome-specific test states are also retained as QA evidence. These artifacts are not canonical seven-region compositions and are not additional source-of-truth modules.
 
 All prototype interactions remain local-only. They do not navigate to, create, or mutate Treatment Planning, Shared Visit, Performed Procedure, Clinical Record History, Dental Chart, billing, insurance, scheduling, or queue modules.
+
+## v1.1 clarification
+
+The existing local Save/Cancel prototype reactions are explicitly authorized for validation under `FIELD_SPECIFICATION_V1.1_AMENDMENT.md`.
+
+Authorized:
+
+- `Save Closure Outcome` → local Saved QA state
+- `Cancel` → local Cancelled QA state
+
+Not authorized:
+
+- production cross-module navigation
+- automatic treatment completion
+- visit closure
+- procedure creation
+- chart mutation
+- history creation
+- billing/insurance/scheduling/queue mutation
 
 ## Legacy composition
 
@@ -62,6 +85,7 @@ Clinical Closure may only be added to the frozen module registry after a separat
 ## Related records
 
 - `FIELD_SPECIFICATION.md`
+- `FIELD_SPECIFICATION_V1.1_AMENDMENT.md`
 - `CANONICALIZATION_PLAN.md`
 - `CANONICAL_NAME_RESOLUTION.md`
 - `CANONICAL_VERIFICATION_V1.md`
