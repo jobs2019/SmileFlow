@@ -1,13 +1,24 @@
 # Clinical Workspace — Status
 
-Status: FROZEN
+## Current status
+REPLACEMENT ARCHITECTURE APPROVED — Figma replacement implementation NOT IMPLEMENTED
 
-Canonical frame: `Clinical Workspace — Phase 1`
-Node: `207:1291`
+## Canonical composition under replacement architecture
+`Clinical Workspace — Phase 1 — Canonical`
 
-Implementation: PASS
-Visual & UX Audit: PASS
-P0/P1/P2/P3: NONE
-Freeze recommendation: READY TO FREEZE
+## Previous implementation
+The previous Clinical Workspace implementation at `207:1291` (`Clinical Workspace — Phase 1`) is a historical, protected composition associated with the superseded architecture.
 
-No Figma changes were made during the audit.
+It is not the source of truth for the replacement implementation.
+
+## Replacement readiness
+- Architecture: APPROVED
+- Field Specification: APPROVED
+- Figma pre-flight: NOT STARTED
+- Replacement implementation: NOT IMPLEMENTED
+- Structural QA: NOT STARTED
+- Visual & UX Audit: NOT STARTED
+- Freeze: NOT READY
+
+## Required next step
+Run the strict Clinical Workspace Phase 1 Figma pre-flight against the replacement architecture and field specification. No Figma changes are authorized by this status file.
