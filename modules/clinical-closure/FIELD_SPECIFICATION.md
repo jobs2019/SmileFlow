@@ -2,13 +2,11 @@
 
 ## Status
 
-**DRAFT FOR APPROVAL**
+**APPROVED — Phase 1 source of truth**
 
-This document translates the approved Clinical Closure Architecture & Information Model v1.0 into a precise Phase 1 field-level contract.
+This document is the approved precise Phase 1 field-level contract for Clinical Closure.
 
-It is a repository specification only. It does **not** authorize Figma implementation.
-
-No Figma changes are authorized until this specification is explicitly approved and the SmileFlow Figma Preflight protocol passes.
+It does **not** by itself authorize a Figma write. Figma implementation still requires the SmileFlow Figma Preflight protocol to pass and explicit implementation authorization.
 
 ---
 
@@ -256,10 +254,6 @@ Commit or abandon the local Clinical Closure decision.
 - `Save Closure Outcome` must not silently finalize a procedure or complete treatment.
 - `Cancel` must not mutate upstream or downstream records.
 
-### Approval note
-
-The exact action labels above are proposed Phase 1 labels derived from the architecture requirement for commit/cancel closure actions. They require explicit specification approval before implementation.
-
 ---
 
 # 10. Editable / Read-Only Matrix
@@ -451,11 +445,9 @@ Before Figma implementation, the following must be mechanically verifiable:
 
 # 17. Implementation Gate
 
-This specification becomes an implementation authority only when its status is explicitly changed to:
+This specification is now an approved Phase 1 source of truth.
 
-**APPROVED — Phase 1 source of truth**
-
-After approval, the following must occur before any Figma write:
+Approval does not itself authorize a Figma write. Before implementation:
 
 1. Confirm exact-name availability.
 2. Verify required Select Field and Button components.
@@ -468,4 +460,4 @@ After approval, the following must occur before any Figma write:
 9. Perform Visual & UX Audit.
 10. Freeze only after separate explicit authorization.
 
-Until approval, **do not modify Figma**.
+If implementation reveals a problem, stop and return to repository-level brainstorming/revision rather than silently changing the approved contract.
