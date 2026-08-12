@@ -1,65 +1,49 @@
-# Clinical Closure — Architecture & Information Model v1.0
+# Clinical Closure — Architecture & Information Model v1.1
 
 ## Status
 
-DRAFT FOR APPROVAL
+**APPROVED — architecture reconciliation**
 
-This architecture is the next module-level source artifact for SmileFlow.
-It is intentionally limited to the Clinical Closure ownership boundary
-already established in the project.
+This architecture incorporates the approved Shared Visit ↔ Clinical Closure lifecycle contract.
 
-It does not authorize Figma implementation by itself.
-
----
+It does not authorize a Figma write by itself.
 
 ## 1. Purpose
 
-Clinical Closure is the workflow boundary used to classify the outcome of
-the current clinical treatment/visit before downstream finalized procedure
-and historical-record workflows.
+Clinical Closure is the workflow boundary used to classify the outcome of the current clinical treatment/visit after Shared Visit reaches `Ready for Closure` and before the visit lifecycle proceeds to `Closed`.
 
-It receives the current clinical context as read-only reference data and
-owns the closure outcome classification.
-
-Clinical Closure must make the distinction between:
-
-- the current visit state,
-- the treatment state,
-- the closure outcome,
-
-clear and visually explicit.
-
----
+It receives current clinical and visit context as read-only reference data and owns the closure outcome classification.
 
 ## 2. Ownership
 
 ### Clinical Closure owns
-
 - closure outcome classification
 - closure decision for the current clinical context
-- the selected closure outcome
-- closure-specific user action required to submit/confirm the outcome
+- selected closure outcome
+- user-facing closure decision/command within the Clinical Closure workflow when separately authorized
 
 ### Clinical Closure may reference
-
 - Patient identity
 - Patient ID
-- Visit type
-- Chair / current visit context
-- Current visit status
+- Visit ID
+- Visit Date
+- Visit Type
+- Chair
+- Current Visit State
 - Active treatment
 - Tooth / treatment scope
-- Treatment status
+- Treatment Status
 - Current clinical documentation
+- Planned treatment/procedure context
 
 Referenced values remain read-only.
 
 ### Clinical Closure does not own
-
 - patient registration
 - Dental Chart state
 - treatment-plan creation/editing
 - treatment lifecycle management
+- Visit State / Shared Visit lifecycle
 - appointment or queue lifecycle
 - active clinical documentation
 - performed-procedure details
@@ -68,243 +52,128 @@ Referenced values remain read-only.
 - billing
 - insurance
 
----
+## 3. Entry Condition
 
-## 3. Canonical Closure Outcomes
+Clinical Closure is entered only when the authoritative Shared Visit state is:
 
-The project has already established the following closure outcomes as
-Clinical Closure-owned outcomes:
+`Ready for Closure`
 
-1. Completed as Planned
-2. Completed with Modification
-3. Not Completed
-4. Treatment Continues
+The previous demonstration state `In Treatment` is superseded for future Clinical Closure specification and implementation work.
 
-These are closure classifications.
+The current canonical Figma implementation is not silently modified by this architecture document. Any Figma update requires a new preflight and explicit implementation authorization.
 
-They must not be represented as Treatment Planning lifecycle states.
+## 4. Canonical Closure Outcomes
 
-They must not be confused with the Shared Visit state `In Treatment`.
+The approved Clinical Closure outcomes are:
 
----
+1. `Completed as Planned`
+2. `Completed with Modification`
+3. `Not Completed`
+4. `Treatment Continues`
 
-## 4. Relationship to Treatment Planning
+These are closure classifications. They must not be represented as Treatment Planning lifecycle states or Shared Visit states.
 
-Treatment Planning owns the treatment lifecycle:
+## 5. Relationship to Shared Visit
 
-Planned → Scheduled → In Progress → Completed
+Shared Visit owns the authoritative visit lifecycle:
 
-Clinical Closure does not directly edit that lifecycle.
+Scheduled → Checked In → Waiting → Called → In Treatment → Ready for Closure → Closed
 
-Clinical Closure records/classifies what happened at the closure boundary.
+Clinical Closure does not own Visit State.
 
-A closure outcome must not silently mutate Treatment Planning data unless
-a later approved workflow explicitly defines that transition.
+The Phase 1 dependency is:
 
----
-
-## 5. Relationship to Clinical Workspace
-
-Clinical Workspace owns active clinical work and current documentation.
-
-Clinical Closure receives that context as reference information.
-
-Clinical Closure must not duplicate the Clinical Workspace documentation
-workflow or provide another general-purpose clinical notes workspace.
-
----
-
-## 6. Relationship to Performed Procedure
-
-Performed Procedure owns finalized actual procedure information.
-
-Clinical Closure must not become the Performed Procedure editor.
-
-The closure outcome may provide an authorized downstream handoff, but the
-actual procedure record remains owned by Performed Procedure.
-
----
-
-## 7. Relationship to Clinical Record History
-
-Clinical Record History owns historical chronology.
-
-Clinical Closure is a current workflow boundary, not a historical timeline.
-
-Do not place a visit/procedure/history timeline inside Clinical Closure.
-
----
-
-## 8. Seven-Region Information Architecture
-
-The canonical Phase 1 composition should use exactly seven top-level regions.
-
-### Region 1 — Clinical Closure Header
-
-Purpose:
-Identify the patient and module.
-
-Expected information:
-
-- Patient Name
-- Patient ID
-- `Clinical Closure`
-
-Patient identity is read-only.
-
----
-
-### Region 2 — Visit Context
-
-Purpose:
-Provide read-only context for the closure decision.
-
-Expected references:
-
-- Visit Type
-- Chair
-- Current Visit Status
-
-The current visit state must remain visually distinct from the closure
-outcome.
-
----
-
-### Region 3 — Active Treatment Context
-
-Purpose:
-Identify what treatment is being closed.
-
-Expected references:
-
-- Treatment Name
-- Tooth / Site
-- Planned Surface where applicable
-- Treatment Status
-
-All treatment context is read-only.
-
-No Treatment Planning editing controls belong here.
-
----
-
-### Region 4 — Closure Outcome
-
-Purpose:
-Allow the user to select the Clinical Closure outcome.
-
-Canonical outcome vocabulary:
-
-- Completed as Planned
-- Completed with Modification
-- Not Completed
-- Treatment Continues
-
-This is the primary Clinical Closure decision area.
-
-The implementation should use an existing appropriate Select Field instance
-when a selectable control is required by the approved field specification.
-
----
-
-### Region 5 — Closure Context / Summary
-
-Purpose:
-Show the selected closure context before submission.
-
-This region may present read-only derived/reference information needed to
-verify the decision.
-
-It must not become a duplicate Clinical Workspace documentation area.
-
----
-
-### Region 6 — Downstream Handoff
-
-Purpose:
-Clearly communicate the next workflow boundary after closure.
-
-The handoff must remain conceptually separate from:
-
-- Treatment Planning
-- Performed Procedure
-- Clinical Record History
-
-No downstream module should be modified merely by displaying the handoff.
-
-Actual navigation/transition must be explicitly approved in the Phase 1
-field specification before implementation.
-
----
-
-### Region 7 — Closure Actions
-
-Purpose:
-Provide the approved action(s) required to commit or cancel the closure
-decision.
-
-Actions must use existing Button instances.
-
-No appointment, queue, treatment-editing, Dental Chart, billing, insurance,
-or history actions may be introduced.
-
----
-
-## 9. Information Flow
-
-Current clinical context:
-
-Clinical Workspace
-        ↓
+```text
+Shared Visit
+In Treatment
+    ↓
+Shared Visit
+Ready for Closure
+    ↓
 Clinical Closure
-        ↓
-Approved downstream workflow
+Closure Outcome
+    ↓
+closure decision recorded
+    ↓
+Shared Visit may proceed to Closed
+```
 
-Clinical Closure is therefore a boundary, not a replacement for the
-modules before or after it.
+Saving a Closure Outcome does not, by this architecture alone, authorize automatic Shared Visit mutation.
 
----
+### Close Visit distinction
 
-## 10. State Semantics
+The architecture permits Clinical Closure to own a future user-facing `Close Visit` command while Shared Visit remains the authoritative owner of the resulting state transition `Ready for Closure → Closed`.
+
+No `Close Visit` control is authorized in the current canonical implementation by this document alone.
+
+## 6. Relationship to Treatment Planning
+
+Treatment Planning owns the treatment lifecycle. Clinical Closure does not directly edit treatment lifecycle/status.
+
+Selecting or saving a Closure Outcome must not silently mutate Treatment Planning unless a later approved workflow explicitly defines that transition.
+
+## 7. Relationship to Clinical Workspace
+
+Clinical Workspace owns active clinical work and current documentation. Clinical Closure receives that context as reference information and must not duplicate the Clinical Workspace documentation workflow.
+
+## 8. Relationship to Performed Procedure
+
+Performed Procedure owns finalized actual procedure information. Clinical Closure must not become the Performed Procedure editor.
+
+## 9. Relationship to Clinical Record History
+
+Clinical Record History owns historical chronology. Clinical Closure is a current workflow boundary, not a historical timeline.
+
+## 10. Seven-Region Information Architecture
+
+The canonical Phase 1 composition uses exactly seven top-level regions:
+
+1. Clinical Closure Header
+2. Visit Context
+3. Active Treatment Context
+4. Closure Outcome
+5. Closure Context / Summary
+6. Downstream Handoff
+7. Closure Actions
+
+Region 2 must present `Ready for Closure` when Clinical Closure is entered under this architecture.
+
+## 11. Information Flow
+
+```text
+Clinical Workspace
+      ↓
+Performed Procedure
+      ↓
+Shared Visit → Ready for Closure
+      ↓
+Clinical Closure
+      ↓
+Shared Visit lifecycle → Closed
+      ↓
+Clinical Record History
+```
+
+This is a conceptual ownership/dependency model. It does not define backend persistence or automatic navigation.
+
+## 12. State Semantics
 
 ### Visit state
-
-`In Treatment`
-
-Owned by the Shared Visit / current visit domain.
+`Ready for Closure` — owned by Shared Visit.
 
 ### Treatment state
-
-`In Progress`
-
-Owned by Treatment Planning.
+`In Progress` in the treatment-context example unless separately approved — owned by Treatment Planning.
 
 ### Closure outcome
+One of the four authorized outcomes — owned by Clinical Closure.
 
-One of:
+These concepts must remain visually and semantically distinct.
 
-- Completed as Planned
-- Completed with Modification
-- Not Completed
-- Treatment Continues
+## 13. Multi-Visit Rule
 
-Owned by Clinical Closure.
+`Treatment Continues` preserves the possibility that treatment extends beyond the current visit. Closing the current visit does not imply treatment completion.
 
-These three concepts must remain visually and semantically distinct.
-
----
-
-## 11. Multi-Visit Rule
-
-`Treatment Continues` explicitly preserves the possibility that treatment
-extends beyond the current visit.
-
-Clinical Closure must not visually or semantically imply that closing the
-current visit automatically completes the treatment plan.
-
----
-
-## 12. Safety Boundaries
+## 14. Safety Boundaries
 
 Clinical Closure must not introduce:
 
@@ -322,79 +191,56 @@ Clinical Closure must not introduce:
 - billing
 - insurance
 
----
+## 15. Prototype Boundary
 
-## 13. Prototype Boundary
+Phase 1 contains only explicitly approved local prototype behavior.
 
-Phase 1 should contain only explicitly approved closure transitions.
-
-Do not invent:
+No prototype or production behavior may invent:
 
 - automatic treatment completion
 - automatic procedure creation
 - automatic history creation
-- automatic visit-state mutation
+- automatic Visit State mutation
+- automatic cross-module navigation
 
-If the precise field-level specification does not explicitly authorize a
-transition, it must not be implemented.
+Any future `Close Visit` interaction requires a separate approved interaction specification defining how the user-facing command invokes the Shared Visit-owned lifecycle transition.
 
----
+## 16. Design-System Boundary
 
-## 14. Design-System Boundary
+Clinical Closure must reuse existing SmileFlow components. Do not modify component definitions, component sets, variants, variables, styles, tokens, typography foundations, or icons.
 
-Clinical Closure must reuse existing SmileFlow components.
+If a required component is unavailable or incompatible, stop before making Figma changes and report the exact blocker.
 
-Do not modify:
-
-- component definitions
-- component sets
-- variants
-- variables
-- styles
-- tokens
-- typography foundations
-- icons
-
-If a required component is unavailable or incompatible, stop before making
-Figma changes and report the exact blocker.
-
----
-
-## 15. Phase 1 Invariants
+## 17. Phase 1 Invariants
 
 1. Exactly one canonical Clinical Closure composition.
 2. Exactly seven top-level regions.
 3. Existing components are reused as genuine instances.
-4. Closure outcomes remain distinct from treatment lifecycle states.
-5. `Treatment Continues` preserves multi-visit treatment.
-6. No Clinical Workspace documentation editor is duplicated.
-7. No Performed Procedure editor is introduced.
-8. No Clinical Record History timeline is introduced.
-9. No Dental Chart or Treatment Planning mutation is introduced.
-10. Frozen modules remain untouched.
-11. No design-system definitions are modified.
-12. No Phase 2 behavior is introduced.
+4. Closure outcomes remain distinct from treatment lifecycle states and Visit State.
+5. Clinical Closure entry state is `Ready for Closure`.
+6. Shared Visit remains the sole owner of Visit State and visit lifecycle.
+7. `Treatment Continues` preserves multi-visit treatment.
+8. No Clinical Workspace documentation editor is duplicated.
+9. No Performed Procedure editor is introduced.
+10. No Clinical Record History timeline is introduced.
+11. No Dental Chart or Treatment Planning mutation is introduced.
+12. Frozen modules remain untouched unless a separate Architecture Exception is approved.
+13. No design-system definitions are modified.
+14. No Phase 2 behavior is introduced.
+15. No `Close Visit` implementation is authorized solely by this architecture update.
 
----
+## 18. Implementation Gate
 
-## 16. Implementation Gate
+Before any Figma implementation change:
 
-This Architecture & Information Model is the prerequisite for:
+1. Reconcile the field specification with this architecture.
+2. Re-run the Cross-Module Dependency Audit.
+3. Run a new Clinical Closure Figma Preflight.
+4. Confirm protected/frozen nodes.
+5. Obtain explicit implementation authorization.
+6. Perform structural QA.
+7. Perform Visual & UX Audit.
+8. Perform Final QA.
+9. Freeze only after separate explicit authorization.
 
-`Clinical Closure — Precise Field-Level Specification v1.0`
-
-It is not itself an implementation authorization.
-
-Before Phase 1 implementation, the precise specification must define:
-
-- exact field labels
-- exact demonstration values
-- exact component types
-- editable/read-only status
-- exact action labels
-- exact prototype transitions
-- exact downstream handoff behavior, if any
-- exact canonical composition name
-- exact seven-region content
-
-No Figma changes should be made until that specification is approved.
+No Figma changes are authorized by this architecture reconciliation alone.
