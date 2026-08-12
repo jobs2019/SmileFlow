@@ -8,6 +8,7 @@
 5. Shared Visit — Phase 1 — Canonical
 6. Performed Procedure — Phase 1 — Canonical
 7. Clinical Record History — Phase 1
+8. Clinical Workspace — Phase 1 — Canonical
 
 ## Clinical Workspace — architecture replacement
 Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception was authorized to replace/update its source of truth with the newly approved Clinical Workspace Phase 1 architecture and field specification.
@@ -30,7 +31,7 @@ Replacement Figma implementation: COMPLETE
 Figma pre-flight: PASS
 Structural QA: PASS
 Visual & UX Audit: PASS
-Freeze: NOT FROZEN
+Freeze: FROZEN
 
 Exactly seven regions are implemented:
 1. Workspace Header
@@ -48,7 +49,7 @@ Insurance is explicitly excluded.
 Previous composition: `207:1291 — Clinical Workspace — Phase 1`
 Status: HISTORICAL / PROTECTED / UNTOUCHED
 
-The previous composition was not modified, deleted, renamed, duplicated, or repurposed during replacement implementation.
+The previous composition was not modified, deleted, renamed, duplicated, or repurposed during replacement implementation or freeze verification.
 
 ## Clinical Workspace — validation artifacts
 - Implementation: `modules/clinical-workspace/IMPLEMENTATION_REPORT_REPLACEMENT.md`
@@ -103,10 +104,10 @@ Canonical composition: `153:1204`
 
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
-- The Clinical Workspace exception is explicitly authorized for source-of-truth replacement and bounded Figma adoption.
-- Clinical Workspace replacement implementation is complete and audited but remains unfrozen until separately authorized.
+- The Clinical Workspace replacement exception was explicitly authorized for source-of-truth replacement and bounded Figma adoption.
+- Clinical Workspace replacement implementation and audits are complete and the canonical replacement is now frozen.
 - Clinical Closure is not currently approved for Figma implementation.
-- No freeze is implied by implementation or audit completion.
+- No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
 
 ## Next step
-Clinical Workspace replacement implementation and audits are complete. Do not freeze the module unless separately authorized. Continue with the next explicitly authorized SmileFlow module/task.
+Clinical Workspace Phase 1 — Canonical is frozen. Continue with the next explicitly authorized SmileFlow module/task.
