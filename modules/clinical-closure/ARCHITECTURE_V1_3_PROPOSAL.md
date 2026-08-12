@@ -2,27 +2,25 @@
 
 ## Status
 
-**APPROVED — IMPLEMENTED — FINAL QA DOCUMENTATION RECONCILED**
+**APPROVED — CANONICALIZED — FROZEN**
 
-Clinical Closure v1.3 architecture is approved for the bounded Figma implementation and Functional QA construction authorized by `V1_3_APPROVAL.md`.
+Clinical Closure v1.3 is the authoritative frozen architecture baseline. It was approved, implemented within the bounded Figma scope, passed Functional QA, Structural / Visual QA, Final QA, and was subsequently canonicalized under `CANONICALIZATION_FREEZE_AUTHORIZATION_V1_3.md`.
 
-The v1.2 canonical implementation was protected during implementation. The v1.3 Figma work was performed as the explicitly authorized bounded construction, with no authorization for production/backend behavior or automatic cross-module mutation.
+The historical proposal filename is retained for repository continuity; the document is no longer a proposal.
 
-This document is now the authoritative architecture record for Clinical Closure v1.3. The historical proposal status is retained only as repository history; it is no longer the current gate state.
+## Freeze boundary
 
-## Approval and implementation boundary
-
-Approved:
+Frozen:
 
 - Clinical Closure v1.3 architecture
 - Four canonical Closure Outcome values
 - Structured closure-record model
 - Seven-region architecture
 - Existing SmileFlow component reuse
-- Bounded Figma Functional QA construction
-- Functional QA coverage for outcome and validation behavior
+- Canonical Figma frame `220:1294`
+- Ownership and cross-module boundaries
 
-Not authorized by this document:
+Not authorized by this architecture:
 
 - production/backend implementation
 - database/API behavior
@@ -291,7 +289,7 @@ This architecture does not authorize:
 
 ## 16. Gate state
 
-The v1.3 gate sequence is now:
+The v1.3 gate sequence is complete:
 
 1. v1.3 architecture approval — **APPROVED**
 2. Field specification approval — **APPROVED / RECONCILED**
@@ -301,10 +299,8 @@ The v1.3 gate sequence is now:
 6. Functional QA construction — **COMPLETE**
 7. Functional Prototype QA — **PASS**
 8. Structural / Visual QA — **PASS**
-9. Final QA — **PENDING DOCUMENTATION RECONCILIATION COMPLETION**
-10. Canonicalization / freeze — **NOT YET AUTHORIZED**
-
-The remaining gate is documentation consistency, not an architectural or Figma blocker.
+9. Final QA — **PASS**
+10. Canonicalization / freeze — **AUTHORIZED / COMPLETE**
 
 ## 17. Historical baseline protection
 
@@ -312,4 +308,8 @@ The v1.2 canonical implementation was protected during the v1.3 work.
 
 No v1.2 behavior was removed merely because v1.3 was introduced.
 
-The approved v1.3 construction does not authorize production runtime behavior.
+The frozen v1.3 baseline does not authorize production runtime behavior.
+
+## 18. Change control after freeze
+
+Any change to this frozen baseline requires a new versioned change proposal and the appropriate dependency audit, preflight, implementation authorization, QA, and re-freeze sequence.
