@@ -5,10 +5,9 @@
 2. Patient Registration
 3. Dental Chart — Phase 1 — Canonical
 4. Treatment Planning — Phase 1 — Canonical
-5. Clinical Closure — Phase 1 — Canonical
-6. Shared Visit — Phase 1 — Canonical
-7. Performed Procedure — Phase 1 — Canonical
-8. Clinical Record History — Phase 1
+5. Shared Visit — Phase 1 — Canonical
+6. Performed Procedure — Phase 1 — Canonical
+7. Clinical Record History — Phase 1
 
 ## Clinical Workspace — architecture replacement
 Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception has now been authorized to replace/update its source of truth with the newly approved Clinical Workspace Phase 1 architecture and field specification.
@@ -48,13 +47,14 @@ Insurance is explicitly excluded.
 
 Status: IMPLEMENTED — FINAL.
 
-## Clinical Closure
-Architecture: APPROVED
-Field Specification: APPROVED
-Implementation: COMPLETE
-Visual/UX Audit: PASS
-Freeze: FROZEN
-Canonical frame: `220:1294`
+## Clinical Closure — next module
+Architecture: DRAFT FOR APPROVAL
+Field Specification: NOT APPROVED
+Implementation: NOT IMPLEMENTED
+Visual/UX Audit: NOT STARTED
+Freeze: NOT FROZEN
+
+The Clinical Closure architecture currently recorded at `modules/clinical-closure/ARCHITECTURE.md` is a draft for approval and does not authorize Figma implementation. No Clinical Closure Figma implementation should be inferred from historical state references.
 
 ## Shared Visit
 Architecture: APPROVED
@@ -85,8 +85,9 @@ Canonical composition: `153:1204`
 
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
-- The Clinical Workspace exception is now explicitly authorized for source-of-truth replacement and subsequent bounded Figma adoption.
-- No Figma changes, repository freeze, or module freeze are implied by this exception update.
+- The Clinical Workspace exception is explicitly authorized for source-of-truth replacement and subsequent bounded Figma adoption.
+- Clinical Closure is not currently approved for Figma implementation.
+- No Figma changes, repository freeze, or module freeze are implied by repository state changes alone.
 
 ## Next step
-Run the strict Clinical Workspace Phase 1 Figma pre-flight against the replacement source of truth. If pre-flight passes, implementation may proceed only within its authorized boundary.
+Continue the strict SmileFlow governance setup. Clinical Workspace Figma pre-flight remains a later authorized step after the repository governance work is complete.
