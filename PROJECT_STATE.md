@@ -16,7 +16,7 @@ Architecture Exception: APPROVED
 Previous frozen source: `modules/clinical-workspace/ARCHITECTURE.md` and `modules/clinical-workspace/FIELD_SPECIFICATION.md`
 Replacement source of truth: current approved files at the same paths
 Figma implementation: NOT IMPLEMENTED under replacement architecture
-Figma pre-flight: NOT STARTED
+Figma pre-flight: COMPLETE — NOT READY
 Freeze: NOT READY
 
 The previous Clinical Workspace Figma composition remains protected until the replacement implementation is separately authorized by pre-flight. No Figma change is implied by this repository update.
@@ -37,6 +37,15 @@ Seven regions:
 
 Sole authorized action: `Save Clinical Notes`.
 Insurance is explicitly excluded.
+
+## Clinical Workspace — preflight result
+Strict read-first Figma preflight: COMPLETE — NOT READY.
+
+Primary blocker: the protected historical Figma composition `207:1291` does not conform to the replacement architecture and must not be modified or repurposed. The replacement must be created as a new canonical composition after separate implementation authorization.
+
+Required implementation corrections include the missing Clinical Assessment and Treatment Plan Context regions, the approved editable assessment fields, Materials / Technique documentation, and replacement of the prohibited Clinical Closure action with the sole authorized `Save Clinical Notes` action.
+
+Preflight record: `modules/clinical-workspace/FIGMA_PREFLIGHT.md`
 
 ## Design-system dependencies
 ### Functional Select Field v1.2
@@ -86,8 +95,9 @@ Canonical composition: `153:1204`
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
 - The Clinical Workspace exception is explicitly authorized for source-of-truth replacement and subsequent bounded Figma adoption.
+- Clinical Workspace replacement implementation remains blocked until the preflight result is resolved and implementation is separately authorized.
 - Clinical Closure is not currently approved for Figma implementation.
 - No Figma changes, repository freeze, or module freeze are implied by repository state changes alone.
 
 ## Next step
-Continue the strict SmileFlow governance setup. Clinical Workspace Figma pre-flight remains a later authorized step after the repository governance work is complete.
+Resolve the Clinical Workspace preflight blockers, confirm/authorize the replacement implementation plan, then implement only the approved replacement composition. Structural QA and Visual & UX Audit must follow before any freeze decision.
