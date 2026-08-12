@@ -12,14 +12,28 @@ A frozen module may only be changed after an explicit Architecture Exception is 
 - Shared Visit — Phase 1 — Canonical (`256:1303`) — FROZEN
 - Performed Procedure — Phase 1 — Canonical (`260:2`) — FROZEN
 - Clinical Record History — Phase 1 (`153:1204`) — FROZEN
+- Clinical Workspace — Phase 1 — Canonical (`328:1919`) — FROZEN
 
 ## Protected legacy modules
 - Dental Chart — Phase 1 (`127:1110`) — FROZEN
 - Treatment Planning — Phase 1 (`136:1124`) — FROZEN
+- Clinical Workspace — Phase 1 (`207:1291`) — FROZEN / HISTORICAL PROTECTED
 
 ## Explicitly not frozen
-- Clinical Workspace — replacement architecture approved; replacement implementation not yet authorized for Figma
 - Clinical Closure — next module; architecture is draft for approval and implementation is not authorized
 
 ## Freeze rule
 The absence of a module from the frozen registry does not grant permission to modify it. Architecture, field specification, project state, and explicit user authorization still govern changes.
+
+## Clinical Workspace freeze basis
+The replacement canonical composition `328:1919` was frozen only after:
+
+- approved architecture and field specification were satisfied;
+- strict Figma preflight passed;
+- replacement implementation completed;
+- structural QA passed;
+- Visual & UX Audit passed;
+- final read-only Figma verification confirmed the canonical seven-region structure;
+- protected historical node `207:1291` remained untouched.
+
+Any future modification requires an explicit Architecture Exception and a new implementation authorization.
