@@ -2,11 +2,11 @@
 
 ## Status
 
-**APPROVED — RECONCILED — IMPLEMENTED FOR BOUNDED QA**
+**APPROVED — CANONICALIZED — FROZEN**
 
-This is the approved v1.3 field-level specification. It reconciles the architecture, cross-module dependency audit, Figma preflight, implementation authorization, and completed Functional QA.
+This is the authoritative frozen v1.3 field-level specification. It reconciles the architecture, cross-module dependency audit, Figma preflight, implementation authorization, completed Functional QA, Structural / Visual QA, and Final QA.
 
-The specification authorizes the bounded Figma QA construction only. It does not authorize production/backend behavior, database implementation, automatic cross-module mutation, or `Close Visit` behavior.
+Canonicalization and freeze are recorded in `CANONICALIZATION_FREEZE_AUTHORIZATION_V1_3.md`.
 
 ## 1. Purpose
 
@@ -474,9 +474,9 @@ Out of scope:
 - autonomous clinical decision-making
 - full revision history
 
-## 19. Reconciled gate state
+## 19. Frozen gate state
 
-The v1.3 implementation gate is complete through Functional QA:
+The v1.3 lifecycle is complete:
 
 1. Architecture approval — **APPROVED**
 2. Field specification approval — **APPROVED / RECONCILED**
@@ -486,7 +486,9 @@ The v1.3 implementation gate is complete through Functional QA:
 6. Bounded Functional QA construction — **COMPLETE**
 7. Functional Prototype QA — **PASS**
 8. Structural QA / Visual & UX Audit — **PASS**
-9. Final QA — **NEXT**
-10. Canonicalization / freeze — **NOT YET AUTHORIZED**
+9. Final QA — **PASS**
+10. Canonicalization / freeze — **AUTHORIZED / COMPLETE**
 
-This document no longer contains a pre-implementation authorization gate. The remaining gate is Final QA.
+## 20. Change control after freeze
+
+Any change to this frozen v1.3 field contract requires a new versioned change proposal and the appropriate dependency audit, preflight, implementation authorization, QA, and re-freeze sequence.
