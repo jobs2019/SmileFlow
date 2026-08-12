@@ -29,6 +29,10 @@ The Product Shell specification requires prototype-level affordances for:
 
 The prototype is not expected to implement production authentication or database behavior. It must, however, provide demonstrable prototype interactions where the specification identifies navigation/action behavior.
 
+## Inspection method
+
+The Figma Plugin API was used in read-only mode to recursively inspect the `reactions` property of every descendant node in all four Product Shell frames.
+
 ## Inspection result
 
 The Figma prototype reaction inspection returned **zero reactions** for all four Product Shell top-level frames and their descendants exposed through the Figma plugin inspection:
@@ -41,6 +45,19 @@ The Figma prototype reaction inspection returned **zero reactions** for all four
 | Mobile | `387:140` | 0 detected |
 
 Therefore functional wiring cannot be certified.
+
+## QA matrix
+
+| Capability | Desktop | Laptop | Tablet | Mobile | Result |
+|---|---|---|---|---|---|
+| Dashboard navigation | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Patients navigation | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Visits navigation | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Clinical navigation | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Records navigation | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Global patient search | Not verified | Not verified | Not verified | Not verified | FAIL |
+| User/account entry | Not verified | Not verified | Not verified | Not verified | FAIL |
+| Responsive viewport composition | Present | Present | Present | Present | PASS |
 
 ## Visual presence vs functional behavior
 
