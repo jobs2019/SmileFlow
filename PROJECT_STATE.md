@@ -119,30 +119,47 @@ Freeze: FROZEN
 Canonical composition: `256:1303`
 
 ## Performed Procedure
-Repository state: COMPLETE / FROZEN per current project ledger and frozen registry.
+Repository state: **COMPLETE / FROZEN / DOCUMENTATION RECONSTRUCTED / CONSISTENCY VERIFIED**.
 Canonical composition: `260:2`
 Implementation: COMPLETE
 Freeze: FROZEN
 
-Repository documentation is currently minimal (`AGENTS.md` only in the module directory). This is a documentation completeness issue, not authorization to modify Figma. Before any future work involving this module, its authoritative architecture/field specification and implementation evidence should be reconciled or restored.
+Repository documentation was reconstructed from verified Figma evidence because the original historical specification was not recovered from repository history. The reconstruction is explicitly not represented as historical recovery.
+
+Verified documentation chain:
+- `modules/performed-procedure/RECOVERY_EVIDENCE.md`
+- `modules/performed-procedure/ARCHITECTURE.md`
+- `modules/performed-procedure/FIELD_SPECIFICATION.md`
+- `modules/performed-procedure/SPECIFICATION_CONSISTENCY_AUDIT.md`
+
+The consistency audit passed. The frozen Figma node `260:2` remains untouched.
 
 ## Clinical Record History
-Repository state: COMPLETE / FROZEN per current project ledger and frozen registry.
+Repository state: **COMPLETE / FROZEN / DOCUMENTATION RECONSTRUCTED / CONSISTENCY VERIFIED**.
 Canonical composition: `153:1204`
 Implementation: COMPLETE
 Freeze: FROZEN
 
-Repository documentation is currently minimal (`AGENTS.md` only in the module directory). This is a documentation completeness issue, not authorization to modify Figma. Before any future work involving this module, its authoritative architecture/field specification and implementation evidence should be reconciled or restored.
+Repository documentation was reconstructed from verified Figma evidence because the original historical specification was not recovered from repository history. The reconstruction is explicitly not represented as historical recovery.
+
+Verified documentation chain:
+- `modules/clinical-record-history/RECOVERY_EVIDENCE.md`
+- `modules/clinical-record-history/ARCHITECTURE.md`
+- `modules/clinical-record-history/FIELD_SPECIFICATION.md`
+- `modules/clinical-record-history/SPECIFICATION_CONSISTENCY_AUDIT.md`
+
+The consistency audit passed. The Figma node `153:1204` remains untouched.
 
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
 - The Clinical Workspace replacement exception was explicitly authorized for source-of-truth replacement and bounded Figma adoption.
 - Clinical Workspace replacement implementation and audits are complete and the canonical replacement is frozen.
 - Clinical Closure Phase 1 is implemented, validated, canonical, and not frozen.
+- Performed Procedure and Clinical Record History remain frozen; their repository documentation is now reconstructed and consistency-verified, but this does not authorize Figma modification.
 - No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
 - Clinical Closure is not automatically authorized for additional Figma modification merely because it is not frozen; any new change still requires the normal repository interpretation, preflight, and explicit implementation authorization gates.
 
 ## Current next step
-Repository state is reconciled for the completed Clinical Closure and Clinical Workspace work. Before selecting the next module for implementation, perform a targeted documentation/readiness inspection of Performed Procedure and Clinical Record History because their module directories currently contain only `AGENTS.md` while the project ledger and frozen registry identify them as complete/frozen.
+Repository state reconciliation and documentation recovery for Performed Procedure and Clinical Record History are complete. The repository now has verified documentation chains for both frozen modules. Before selecting any new Figma implementation task, inspect the remaining repository module inventory and dependency/readiness state to identify the actual next unfinished work.
 
 No Figma modification is authorized by this reconciliation.
