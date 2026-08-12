@@ -18,8 +18,9 @@ This contract resolves the Phase 1 dependency between Shared Visit and Clinical 
 ### Clinical Closure owns
 
 - Closure Outcome
+- closure record
 - closure classification
-- the user-facing closure decision/command within the Clinical Closure workflow
+- the user-facing closure workflow and closure-record save action
 
 Clinical Closure does not become the owner of Visit State.
 
@@ -43,22 +44,22 @@ Ready for Closure
 Clinical Closure
 select Closure Outcome
     ↓
-Save Closure Outcome
+Save Closure Record
     ↓
-Closure decision recorded
+Closure record recorded
     ↓
 Shared Visit lifecycle may proceed to Closed
 ```
 
-The `Save Closure Outcome` action does not, by this contract alone, authorize automatic mutation of Shared Visit.
+The `Save Closure Record` action does not, by this contract alone, authorize automatic mutation of Shared Visit.
 
 ## 4. Close Visit ownership distinction
 
-The repository architecture identifies `Close Visit` as a Clinical Closure user-facing command while Shared Visit remains the authoritative owner of the resulting lifecycle state.
+The repository architecture identifies `Close Visit` as a possible future Clinical Closure user-facing command while Shared Visit remains the authoritative owner of the resulting lifecycle state.
 
 Therefore:
 
-- Clinical Closure may own the user-facing closure command in a future explicitly approved interaction specification.
+- Clinical Closure may own a future user-facing closure command only through a separately approved interaction specification.
 - Shared Visit owns the state transition `Ready for Closure → Closed`.
 - The command must not introduce a second Visit State owner.
 - The command must not directly edit or duplicate Shared Visit's lifecycle model.
