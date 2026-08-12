@@ -2,7 +2,7 @@
 
 ## Status
 
-**PASS WITH CONDITIONS — IMPLEMENTATION-READY FOR A DEDICATED INTEGRATION HARNESS ONLY**
+**PASS — IMPLEMENTATION-READY FOR A DEDICATED INTEGRATION HARNESS ONLY**
 
 Date: 2026-08-12
 
@@ -29,7 +29,24 @@ File key: `4XiHoPFlljnne38HnjLgc6`
 | Treatment Planning | Treatment Planning — Phase 1 — Canonical | `198:1290` | PASS |
 | Performed Procedure | Performed Procedure — Phase 1 — Canonical | `260:2` | PASS |
 | Clinical Closure | Clinical Closure — Phase 1 — Canonical | `220:1294` | PASS |
-| Clinical Record History | Current canonical destination must be resolved from the authoritative module documentation before wiring | — | CONDITIONAL |
+| Clinical Record History | Clinical Record History — Phase 1 | `153:1204` | PASS |
+
+## Clinical Record History resolution
+
+INT-08 was conditionally blocked pending authoritative destination verification.
+
+The repository evidence resolves the blocker:
+
+- `modules/clinical-record-history/ARCHITECTURE.md` identifies Figma node `153:1204` as the inspected implementation.
+- `modules/clinical-record-history/FIELD_SPECIFICATION.md` independently identifies Figma node `153:1204`.
+- `governance/FROZEN_MODULES.md` explicitly records `Clinical Record History — Phase 1 (153:1204) — FROZEN`.
+- Read-only Figma inspection of `153:1204` confirms the node name and the documented four-region read-only composition.
+
+Resolution record:
+
+`BASELINE_INT08_CLINICAL_RECORD_HISTORY_RESOLUTION_V1.md`
+
+Therefore `153:1204` is the authoritative current Clinical Record History canonical destination for baseline integration.
 
 ## Important Clinical Closure finding
 
@@ -45,12 +62,13 @@ The Figma file already contains many historical/local prototype routes. Several 
 - `Treatment Planning — Active`
 - `Clinical Closure — Completed as Planned`
 - `Performed Procedure — Phase 1`
-- `Clinical Record History — Phase 1`
 - older Clinical Closure v1.0 test/prototype states
 
 These routes are existing implementation evidence and are **not automatically reused** for the new baseline integration journey.
 
 The new integration harness must use the current canonical destination inventory and must not silently repair or rewrite unrelated historical routes.
+
+The existing route to `Clinical Record History — Phase 1` is not itself the authority; the repository's current authoritative documentation and frozen registry establish `153:1204` as the canonical destination.
 
 ## Existing integration harness
 
@@ -73,7 +91,7 @@ The following frames must remain untouched during integration-harness constructi
 - `198:1290` Treatment Planning
 - `260:2` Performed Procedure
 - `220:1294` Clinical Closure
-- the authoritative Clinical Record History canonical frame once resolved
+- `153:1204` Clinical Record History
 
 Historical/protected Clinical Workspace frame `207:1291` must also remain untouched.
 
@@ -107,18 +125,10 @@ No new route may:
 - enter the Clinical Closure v1.3 Functional QA page;
 - enter historical/superseded module compositions.
 
-## Conditional blocker
-
-Before INT-08 is wired, the authoritative Clinical Record History canonical Figma destination must be resolved from its current repository evidence. The current preflight found a legacy frame named `Clinical Record History — Phase 1` used by historical prototype routes, but that frame has not been accepted as the current canonical destination by this preflight.
-
 ## Verdict
 
-**PASS WITH CONDITIONS**
+**PASS — ALL EIGHT INTEGRATION ROUTES ARE IMPLEMENTATION-READY**
 
-The integration harness itself is implementation-ready.
+The integration harness is implementation-ready using the verified canonical destination inventory.
 
-Implementation may proceed for INT-01 through INT-07 after the harness is created, provided only canonical destinations are used.
-
-INT-08 remains blocked until the current Clinical Record History canonical destination is verified.
-
-No canonical module write is authorized by this preflight.
+No canonical module write is authorized by this preflight itself; implementation remains bounded by the separate explicit integration implementation authorization.
