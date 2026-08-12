@@ -1,14 +1,12 @@
-# Clinical Closure — Precise Field-Level Specification v1.0
+# Clinical Closure — Precise Field-Level Specification v1.2
 
 ## Status
 
-**APPROVED — Phase 1 source of truth**
+**DRAFT FOR RE-APPROVAL — architecture-reconciled**
 
-This document is the approved precise Phase 1 field-level contract for Clinical Closure.
+This specification preserves the existing Clinical Closure v1.0 field contract and v1.1 prototype-only amendment except where this document explicitly changes the visit-entry context to conform to the approved Shared Visit ↔ Clinical Closure lifecycle contract.
 
-It does **not** by itself authorize a Figma write. Figma implementation still requires the SmileFlow Figma Preflight protocol to pass and explicit implementation authorization.
-
----
+It does not authorize a Figma write by itself.
 
 ## 1. Canonical composition
 
@@ -16,22 +14,15 @@ Canonical name:
 
 `Clinical Closure — Phase 1 — Canonical`
 
-Recommended width:
-
-`920 px`
+Recommended width: `920 px`
 
 Layout:
-
 - Vertical Auto Layout
 - Exactly seven top-level regions
 - Existing SmileFlow components only
 - No global component, variant, variable, style, token, typography, or icon modifications
 
----
-
 ## 2. Canonical demonstration context
-
-Unless a later approved demonstration context replaces these values, Phase 1 uses the following values for structural/design verification:
 
 | Field | Demonstration value | Mode | Owner |
 |---|---|---|---|
@@ -41,7 +32,7 @@ Unless a later approved demonstration context replaces these values, Phase 1 use
 | Visit Date | `August 11, 2026` | Read-only | Shared Visit |
 | Visit Type | `General Consultation` | Read-only | Shared Visit |
 | Chair | `Chair 02` | Read-only | Shared Visit |
-| Visit State | `In Treatment` | Read-only | Shared Visit |
+| Visit State | `Ready for Closure` | Read-only | Shared Visit |
 | Treatment Item | `Composite Restoration` | Read-only | Treatment Planning |
 | Procedure | `Composite Restoration` | Read-only | Treatment Planning |
 | Tooth / Site | `46` | Read-only | Treatment Planning |
@@ -53,33 +44,19 @@ Unless a later approved demonstration context replaces these values, Phase 1 use
 | Planned Surface / Scope | `Occlusal` | Read-only | Treatment Planning |
 | Plan Status | `Planned` | Read-only | Treatment Planning |
 
-These are demonstration values only and do not grant Clinical Closure permission to mutate any upstream module.
+These are demonstration values only and do not grant Clinical Closure permission to mutate upstream modules.
 
----
+## 3. Region 1 — Clinical Closure Header
 
-# 3. Region 1 — Clinical Closure Header
+Purpose: identify the patient and Clinical Closure module.
 
-### Purpose
-Identify the patient and the Clinical Closure module.
+| Field | Exact label | Value | Mode |
+|---|---|---|---|
+| Module title | `Clinical Closure` | `Clinical Closure` | Static/read-only |
+| Patient | `Patient` | `Maria Santos` | Read-only |
+| Patient ID | `Patient ID` | `P-000128` | Read-only |
 
-| Field | Exact label | Value | Mode | Component requirement |
-|---|---|---|---|---|
-| Module title | `Clinical Closure` | `Clinical Closure` | Static/read-only | Existing text/presentation pattern |
-| Patient | `Patient` | `Maria Santos` | Read-only | Existing read-only presentation |
-| Patient ID | `Patient ID` | `P-000128` | Read-only | Existing read-only presentation |
-
-### Rules
-
-- Patient identity is never editable here.
-- No patient search, registration, or identity mutation control.
-- Header must clearly identify this as Clinical Closure rather than Clinical Workspace.
-
----
-
-# 4. Region 2 — Visit Context
-
-### Purpose
-Provide current visit context needed to understand the closure decision.
+## 4. Region 2 — Visit Context
 
 | Field | Exact label | Value | Mode | Owner |
 |---|---|---|---|---|
@@ -87,21 +64,15 @@ Provide current visit context needed to understand the closure decision.
 | Visit Date | `Visit Date` | `August 11, 2026` | Read-only | Shared Visit |
 | Visit Type | `Visit Type` | `General Consultation` | Read-only | Shared Visit |
 | Chair | `Chair` | `Chair 02` | Read-only | Shared Visit |
-| Visit State | `Visit State` | `In Treatment` | Read-only | Shared Visit |
+| Visit State | `Visit State` | `Ready for Closure` | Read-only | Shared Visit |
 
-### Rules
+### Entry rule
 
-- `In Treatment` is a visit state, not a closure outcome.
-- No visit-state editing control.
-- No appointment, queue, check-in, waiting, called, or visit-closing control.
-- `Visit State` must be visually distinct from `Closure Outcome`.
+Clinical Closure is entered only when Shared Visit's authoritative Visit State is `Ready for Closure`.
 
----
+`Visit State` is not editable in Clinical Closure.
 
-# 5. Region 3 — Active Treatment Context
-
-### Purpose
-Identify the treatment being evaluated at the closure boundary.
+## 5. Region 3 — Active Treatment Context
 
 | Field | Exact label | Value | Mode | Owner |
 |---|---|---|---|---|
@@ -111,59 +82,28 @@ Identify the treatment being evaluated at the closure boundary.
 | Planned Surface / Scope | `Planned Surface / Scope` | `Occlusal` | Read-only | Treatment Planning |
 | Treatment Status | `Treatment Status` | `In Progress` | Read-only | Treatment Planning |
 
-### Rules
+No treatment lifecycle mutation, completion control, tooth/site editing, Dental Chart mutation, or treatment-plan editing is authorized.
 
-- `In Progress` is the Treatment Planning lifecycle state.
-- No treatment lifecycle mutation.
-- No treatment completion control.
-- No tooth/site editing.
-- No Dental Chart mutation.
-- No treatment-plan creation or editing.
-
----
-
-# 6. Region 4 — Closure Outcome
-
-### Purpose
-Provide the single primary Clinical Closure decision.
+## 6. Region 4 — Closure Outcome
 
 ### Field
 
 | Field | Exact label | Demonstration value | Mode | Component |
 |---|---|---|---|---|
-| Closure Outcome | `Closure Outcome` | `Completed as Planned` | Editable | Existing appropriate Select Field instance |
+| Closure Outcome | `Closure Outcome` | `Completed as Planned` | Editable | Existing approved Functional Select Field |
 
 ### Canonical option vocabulary
 
-Exactly these four options are authorized:
+Exactly:
 
 1. `Completed as Planned`
 2. `Completed with Modification`
 3. `Not Completed`
 4. `Treatment Continues`
 
-### Rules
+These are Clinical Closure classifications, not Visit State or Treatment Planning lifecycle values.
 
-- These values belong exclusively to Clinical Closure.
-- They must not be presented as Treatment Planning lifecycle states.
-- They must not be merged with Visit State or Treatment Status.
-- Use the existing approved Functional Select Field / appropriate Select Field component.
-- Do not create or modify a global select component for this module.
-- No additional outcome such as `Cancelled`, `Closed`, `Completed`, `Deferred`, or `Abandoned` may be introduced without an approved specification change.
-- `Treatment Continues` must preserve the possibility that the treatment extends beyond the current visit.
-
-### Conditional behavior
-
-Phase 1 does not authorize conditional mutation of upstream data based on the selected outcome.
-
-Selecting an outcome changes the local Clinical Closure decision only.
-
----
-
-# 7. Region 5 — Closure Context / Summary
-
-### Purpose
-Provide a concise read-only confirmation context for the selected closure decision without duplicating Clinical Workspace documentation.
+## 7. Region 5 — Closure Context / Summary
 
 | Field | Exact label | Demonstration value | Mode |
 |---|---|---|---|
@@ -171,66 +111,31 @@ Provide a concise read-only confirmation context for the selected closure decisi
 | Treatment Context | `Treatment Context` | `Composite Restoration — Tooth 46` | Read-only derived/reference display |
 | Visit Context | `Visit Context` | `V-000128 — August 11, 2026` | Read-only derived/reference display |
 
-### Rules
+These are confirmation/reference displays, not editable fields.
 
-- These are confirmation/reference displays, not additional editable fields.
-- No clinical notes editor belongs here.
-- No procedure finalization editor belongs here.
-- No historical timeline belongs here.
-- No billing, insurance, scheduling, or queue information belongs here.
-
-### State synchronization rule
-
-The displayed `Selected Outcome` must represent the current local Closure Outcome selection. It must not silently mutate Treatment Planning, Shared Visit, Performed Procedure, Dental Chart, or Clinical Record History.
-
----
-
-# 8. Region 6 — Downstream Handoff
-
-### Purpose
-Communicate the next workflow boundary without performing an unauthorized transition.
+## 8. Region 6 — Downstream Handoff
 
 | Field | Exact label | Demonstration value | Mode |
 |---|---|---|---|
-| Next Workflow Boundary | `Next Workflow Boundary` | `Performed Procedure` | Read-only |
+| Next Workflow Boundary | `Next Workflow Boundary` | `Shared Visit — Close Lifecycle` | Read-only |
 | Handoff Status | `Handoff Status` | `No automatic transition` | Read-only |
 
-### Rules
+The handoff communicates workflow ownership only. It does not authorize automatic Visit State mutation, procedure creation, history creation, or navigation.
 
-- This region communicates workflow ownership only.
-- It is not a navigation control in Phase 1.
-- It must not create a Performed Procedure record automatically.
-- It must not modify Treatment Planning.
-- It must not modify Shared Visit.
-- It must not create Clinical Record History entries.
-- No cross-module prototype transition is authorized in this specification.
+## 9. Region 7 — Closure Actions
 
-### Rationale
-
-Performed Procedure is the downstream owner of finalized actual procedure information. Clinical Closure may identify that boundary, but Phase 1 does not authorize an automatic transition or record creation.
-
-If later workflow requirements require navigation or automatic handoff, that behavior requires a separate approved interaction specification and a new Figma preflight.
-
----
-
-# 9. Region 7 — Closure Actions
-
-### Purpose
-Commit or abandon the local Clinical Closure decision.
-
-## Action A — Primary
+### Save Closure Outcome
 
 | Property | Value |
 |---|---|
 | Exact label | `Save Closure Outcome` |
 | Type | Primary Button |
-| Editable state | Enabled only when a Closure Outcome is selected |
 | Ownership | Clinical Closure |
 | Effect | Saves the Clinical Closure outcome only |
-| Cross-module mutation | None authorized |
-| Prototype | No reaction in Phase 1 |
+| Cross-module mutation | None authorized by this specification |
+| Prototype | Local-only QA behavior permitted under v1.1 amendment |
 
-## Action B — Secondary
+### Cancel
 
 | Property | Value |
 |---|---|
@@ -239,37 +144,28 @@ Commit or abandon the local Clinical Closure decision.
 | Ownership | Clinical Closure |
 | Effect | Abandons the unsaved local closure decision |
 | Cross-module mutation | None |
-| Prototype | No reaction in Phase 1 |
+| Prototype | Local-only QA behavior permitted under v1.1 amendment |
 
-### Rules
+### Close Visit
 
-- Existing Button instances must be reused.
-- No `Record Procedure` action.
-- No `Close Visit` action.
-- No `Complete Treatment` action.
-- No `Cancel Visit` action.
-- No Dental Chart action.
-- No Treatment Planning action.
-- No billing, insurance, appointment, or queue action.
-- `Save Closure Outcome` must not silently finalize a procedure or complete treatment.
-- `Cancel` must not mutate upstream or downstream records.
+`Close Visit` is **not an implemented Phase 1 action in the current canonical composition**.
 
----
+The architecture permits a future Clinical Closure user-facing `Close Visit` command while Shared Visit remains the authoritative owner of `Ready for Closure → Closed`. Adding this control requires a separate approved interaction specification and Figma Preflight.
 
-# 10. Editable / Read-Only Matrix
+## 10. Editable / Read-Only Matrix
 
-## Editable
+### Editable domain field
 
-Exactly one domain field:
+Exactly one:
 
 - `Closure Outcome`
 
-The following actions are interactive controls but are not data fields:
+### Interactive actions
 
 - `Save Closure Outcome`
 - `Cancel`
 
-## Read-only
+### Read-only
 
 - Patient
 - Patient ID
@@ -294,105 +190,56 @@ The following actions are interactive controls but are not data fields:
 - Next Workflow Boundary
 - Handoff Status
 
-No other editable data field is authorized in Phase 1.
+## 11. State Semantics
 
----
-
-# 11. Component Requirements
-
-## Required existing components
-
-### Closure Outcome
-Use the existing approved Functional Select Field / appropriate Select Field instance.
-
-The implementation must not modify:
-
-- Select Option
-- Select Menu
-- Functional Select Field
-- component sets
-- variants
-- variables
-- tokens
-- styles
-
-### Buttons
-Use existing approved Button instances for:
-
-- `Save Closure Outcome`
-- `Cancel`
-
-### Read-only presentation
-Reuse existing SmileFlow read-only label/value presentation patterns.
-
-Do not create a new global component solely for Clinical Closure.
-
-### Component blocker rule
-
-If the exact required component variant cannot be identified, stop before Figma implementation and report the blocker. Do not substitute a custom component without an approved architecture/specification change.
-
----
-
-# 12. Demonstration-State Semantics
-
-The canonical demonstration state is:
+Canonical demonstration state:
 
 ```text
-Visit State:       In Treatment
+Visit State:       Ready for Closure
 Treatment Status:  In Progress
 Closure Outcome:   Completed as Planned
 ```
 
-These values intentionally represent three different ownership domains.
+These are independent ownership domains.
 
-They must remain visually and semantically distinct.
+A saved Closure Outcome does not by itself imply Treatment Planning completion or Shared Visit closure.
 
-The selected closure outcome does not imply that Treatment Status has changed.
+`Treatment Continues` preserves the possibility of future visits while the current visit can later close.
 
----
+## 12. Prototype / Interaction Boundary
 
-# 13. Prototype / Interaction Boundary
+The v1.1 amendment remains effective for local-only Save/Cancel QA behavior.
 
-Phase 1 has **no automatic cross-module transition**.
+No prototype or production behavior is authorized for:
 
-Specifically, the following are NOT authorized:
-
-- automatic Treatment Planning completion
-- automatic Shared Visit closure
+- automatic Shared Visit mutation
+- automatic visit closure
+- automatic treatment completion
 - automatic Performed Procedure creation
 - automatic Clinical Record History creation
 - automatic Dental Chart mutation
-- automatic navigation to another module
-- automatic billing/insurance action
+- automatic cross-module navigation
+- billing/insurance/scheduling/queue actions
 
-`Save Closure Outcome` saves the Clinical Closure decision only.
+Any future `Close Visit` interaction must be separately specified and must invoke the Shared Visit-owned lifecycle transition rather than create a second lifecycle owner.
 
-`Cancel` discards the unsaved local decision only.
-
-If prototype reactions are later required, they must be defined in a separate approved interaction specification and pass the Figma Preflight protocol again.
-
----
-
-# 14. Ownership Contract
+## 13. Ownership Contract
 
 | Data / behavior | Owner | Clinical Closure behavior |
 |---|---|---|
 | Patient identity | Patient domain | Read-only reference |
 | Visit identity/state | Shared Visit | Read-only reference |
 | Treatment lifecycle | Treatment Planning | Read-only reference |
-| Current clinical documentation | Clinical Workspace | Read-only reference only |
+| Current clinical documentation | Clinical Workspace | Read-only reference |
 | Closure outcome | Clinical Closure | Owns/edit/saves |
-| Finalized procedure | Performed Procedure | Downstream boundary only |
-| Historical chronology | Clinical Record History | Downstream boundary only |
+| Visit lifecycle transition | Shared Visit | Downstream owner; no direct edit in current composition |
+| Finalized procedure | Performed Procedure | Boundary only |
+| Historical chronology | Clinical Record History | Boundary only |
 | Dental chart | Dental Chart | No mutation |
 
-Clinical Closure must never become a duplicate editor for another module.
+## 14. Exclusions
 
----
-
-# 15. Exclusions
-
-The following are explicitly excluded from Phase 1:
+Explicitly excluded from this Phase 1 specification:
 
 - Insurance
 - Billing
@@ -406,7 +253,8 @@ The following are explicitly excluded from Phase 1:
 - Dental Chart editing
 - Treatment Planning editing
 - Treatment completion controls
-- Visit closure controls
+- Visit State editing
+- `Close Visit` implementation
 - Performed Procedure editing
 - Procedure surface/outcome editing
 - Historical timeline editing
@@ -414,50 +262,37 @@ The following are explicitly excluded from Phase 1:
 - Automatic downstream record creation
 - Automatic cross-module navigation
 
----
+## 15. Canonical Composition Invariants
 
-# 16. Canonical Composition Invariants
+1. Exactly one current canonical Clinical Closure composition.
+2. Exactly seven top-level regions.
+3. `Ready for Closure` is the canonical Clinical Closure entry state.
+4. Shared Visit remains the sole owner of Visit State and visit lifecycle.
+5. Closure Outcome is the only editable domain field.
+6. Exactly four Closure Outcome values are authorized.
+7. Existing approved Select Field and Button components are reused.
+8. No unauthorized cross-module action exists.
+9. `Save Closure Outcome` does not automatically close the visit.
+10. `Cancel` does not mutate upstream or downstream records.
+11. No Clinical Workspace documentation editor is duplicated.
+12. No Performed Procedure editor is introduced.
+13. No Clinical Record History timeline is introduced.
+14. No Dental Chart or Treatment Planning mutation is introduced.
+15. Frozen modules remain untouched until explicitly authorized.
+16. Global design-system definitions remain untouched.
+17. No Phase 2 behavior is introduced.
 
-Before Figma implementation, the following must be mechanically verifiable:
+## 16. Implementation Gate
 
-1. Exactly one `Clinical Closure — Phase 1 — Canonical` composition exists.
-2. Exactly seven top-level regions exist.
-3. Region order matches the architecture exactly.
-4. `Closure Outcome` is the only editable domain field.
-5. Closure Outcome contains exactly four authorized options.
-6. Existing approved Select Field components are reused as genuine instances.
-7. Existing Button components are reused as genuine instances.
-8. Exactly two closure actions exist: `Save Closure Outcome` and `Cancel`.
-9. No unauthorized cross-module action exists.
-10. Visit State remains `In Treatment`.
-11. Treatment Status remains `In Progress`.
-12. Closure Outcome remains semantically separate from both.
-13. `Treatment Continues` remains an available closure outcome.
-14. No Clinical Workspace documentation editor is duplicated.
-15. No Performed Procedure editor is introduced.
-16. No Clinical Record History timeline is introduced.
-17. No Dental Chart or Treatment Planning mutation is introduced.
-18. Frozen modules remain untouched.
-19. Global design-system definitions remain untouched.
-20. No Phase 2 behavior is introduced.
+This is a reconciled draft for approval. Before any Figma change:
 
----
+1. Approve this v1.2 specification.
+2. Re-run the Cross-Module Dependency Audit.
+3. Run the Clinical Closure Figma Preflight against v1.2.
+4. Confirm protected/frozen nodes.
+5. Obtain explicit implementation authorization.
+6. Only then modify the canonical Clinical Closure composition if required.
+7. Perform structural QA, Visual/UX Audit, and Final QA.
+8. Freeze only after separate explicit authorization.
 
-# 17. Implementation Gate
-
-This specification is now an approved Phase 1 source of truth.
-
-Approval does not itself authorize a Figma write. Before implementation:
-
-1. Confirm exact-name availability.
-2. Verify required Select Field and Button components.
-3. Verify read-only presentation pattern.
-4. Run the SmileFlow Figma Preflight protocol.
-5. Confirm no protected/frozen composition will be modified.
-6. Obtain explicit implementation authorization.
-7. Create a brand-new canonical composition.
-8. Perform structural QA.
-9. Perform Visual & UX Audit.
-10. Freeze only after separate explicit authorization.
-
-If implementation reveals a problem, stop and return to repository-level brainstorming/revision rather than silently changing the approved contract.
+No Figma changes are authorized by this specification alone.
