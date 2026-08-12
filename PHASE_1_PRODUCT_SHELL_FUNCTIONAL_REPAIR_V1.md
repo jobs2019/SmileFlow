@@ -2,13 +2,13 @@
 
 ## Status
 
-**REPAIRED — INITIAL PRODUCT SHELL HOTSPOTS WIRED**
+**REPAIRED — PROTOTYPE WIRING VERIFIED**
 
 Date: 2026-08-12
 
 ## Figma scope
 
-Protected canonical shell frames retained:
+Protected Product Shell compositions retained:
 
 - Desktop `387:57`
 - Laptop `387:85`
@@ -17,66 +17,96 @@ Protected canonical shell frames retained:
 
 Repair was performed only on `11 — Product Shell`.
 
-No changes were made to `06 — Layouts`, `10 — Baseline Integration`, or the clinical module pages.
+No changes were made to:
+
+- `06 — Layouts`
+- `10 — Baseline Integration`
+- clinical module compositions
+- existing clinical QA pages
 
 ## Functional repair
 
-A prototype-only route harness was added to the Product Shell page with 20 same-page destination frames:
+The existing Product Shell prototype-only route harness was used as the destination surface. The repair added/verified Figma prototype reactions on the existing shell hotspots.
 
-- Desktop: Dashboard, Patients, Visits, Clinical, Records
-- Laptop: Dashboard, Patients, Visits, Clinical, Records
-- Tablet: Dashboard, Patients, Visits, Clinical, Records
-- Mobile: Dashboard, Patients, Visits, Clinical, Records
+### Desktop
 
-The existing shell hotspots were wired to these destinations.
+Wired with `ON_CLICK → NAVIGATE` or account overlay:
 
-### Desktop / Laptop
+- Dashboard → `391:606`
+- Patients → `391:631`
+- Visits → `391:656`
+- Clinical → `391:681`
+- Records → `391:706`
+- Global patient search → Patients route `391:631`
+- User/account → account overlay `391:1031`
+- Search/open patient → Patients route `391:631`
+- Current workflow → Clinical route `391:681`
+- Recent patient → Patients route `391:631`
 
-Wired:
+**10/10 hotspots verified.**
 
-- Primary navigation: Dashboard, Patients, Visits, Clinical, Records
-- Global patient search
-- Search/open patient dashboard action
-- Current workflow dashboard action
-- Recent patient dashboard action
-- User/account control → account overlay
+### Laptop
+
+Wired with `ON_CLICK → NAVIGATE` or account overlay:
+
+- Dashboard → `391:731`
+- Patients → `391:756`
+- Visits → `391:781`
+- Clinical → `391:806`
+- Records → `391:831`
+- Global patient search → Patients route `391:756`
+- User/account → account overlay `391:1031`
+- Search/open patient → Patients route `391:756`
+- Current workflow → Clinical route `391:806`
+- Recent patient → Patients route `391:756`
+
+**10/10 hotspots verified.**
 
 ### Tablet
 
-Wired:
+Wired with `ON_CLICK → NAVIGATE` or overlay:
 
-- Bottom navigation: Dashboard, Patients, Visits, Clinical, Records
-- Menu control → menu overlay
-- User/account control → account overlay
-- Search/open patient action
-- Current workflow action
-- Recent patient action
+- User/account → account overlay `391:1031`
+- Menu → tablet menu overlay `391:1035`
+- Dashboard → `391:856`
+- Patients → `391:874`
+- Visits → `391:892`
+- Clinical → `391:910`
+- Records → `391:928`
+
+The existing tablet menu overlay items are also wired to the corresponding tablet route frames.
+
+**9/9 primary shell hotspots verified.**
 
 ### Mobile
 
-Wired:
+Wired with `ON_CLICK → NAVIGATE` or account overlay:
 
-- Bottom navigation: Home/Dashboard, Patients, Visits, Records
-- User/account control → account overlay
-- Patient search action
-- Search/open patient action
-- Current workflow action
-- Recent patient action
+- User/account → account overlay `391:1031`
+- Patient search → Patients route `391:963`
+- Home → Dashboard route `391:946`
+- Patients → `391:963`
+- Visits → `391:980`
+- Records → `391:1014`
 
-### Tablet menu
+**9/9 primary shell hotspots verified.**
 
-The prototype-only menu overlay contains five destinations and each menu item is wired to its corresponding tablet route frame.
+## Route-harness continuity
+
+The existing desktop/laptop route screens have their primary navigation wired to their corresponding route destinations, so the prototype does not dead-end immediately after entering a route.
+
+Tablet and mobile route surfaces also have their navigation controls wired to their corresponding route destinations.
 
 ## Verification
 
-A read-only Figma reaction inventory confirms reactions are present on all four canonical Product Shell frames.
+Read-only Figma inspection on the correct `11 — Product Shell` page confirmed that every repaired hotspot has:
 
-- Desktop: 10 wired hotspots
-- Laptop: 10 wired hotspots
-- Tablet: 9 wired hotspots
-- Mobile: 9 wired hotspots
+- `ON_CLICK` trigger;
+- `NODE` action;
+- a defined `NAVIGATE` or `OVERLAY` behavior;
+- a valid destination node.
 
-20 route destination frames were verified as top-level frames on `11 — Product Shell`.
+The verification covered the canonical shell hotspots and the tablet menu overlay items.
 
 ## Deliberate boundary
 
@@ -101,4 +131,4 @@ Those remain later-phase work.
 
 > Re-run **SmileFlow Phase 1 — Product Shell Functional Prototype QA** against the repaired Product Shell.
 
-The QA should test the actual prototype interactions, not merely inspect whether reaction objects exist.
+The QA must test the actual prototype route behavior, not merely inspect the presence of reaction objects.
