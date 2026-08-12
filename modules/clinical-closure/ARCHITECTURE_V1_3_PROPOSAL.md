@@ -1,18 +1,45 @@
-# Clinical Closure — Architecture & Information Model v1.3 Proposal
+# Clinical Closure — Architecture & Information Model v1.3
 
 ## Status
 
-**PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED**
+**APPROVED — IMPLEMENTED — FINAL QA DOCUMENTATION RECONCILED**
 
-This proposal extends the approved Clinical Closure v1.1 architecture toward a clinically useful production-oriented closure record while preserving the existing Option A lifecycle boundary.
+Clinical Closure v1.3 architecture is approved for the bounded Figma implementation and Functional QA construction authorized by `V1_3_APPROVAL.md`.
 
-The current v1.2 canonical implementation remains the approved baseline until this proposal is explicitly approved.
+The v1.2 canonical implementation was protected during implementation. The v1.3 Figma work was performed as the explicitly authorized bounded construction, with no authorization for production/backend behavior or automatic cross-module mutation.
+
+This document is now the authoritative architecture record for Clinical Closure v1.3. The historical proposal status is retained only as repository history; it is no longer the current gate state.
+
+## Approval and implementation boundary
+
+Approved:
+
+- Clinical Closure v1.3 architecture
+- Four canonical Closure Outcome values
+- Structured closure-record model
+- Seven-region architecture
+- Existing SmileFlow component reuse
+- Bounded Figma Functional QA construction
+- Functional QA coverage for outcome and validation behavior
+
+Not authorized by this document:
+
+- production/backend implementation
+- database/API behavior
+- automatic Shared Visit mutation
+- automatic `Close Visit`
+- automatic Treatment Planning mutation
+- automatic Performed Procedure creation
+- automatic Clinical Record History creation
+- automatic scheduling/navigation
+- AI diagnosis or autonomous clinical decisions
+- full revision-history implementation
 
 ## 1. Goal
 
 Upgrade Clinical Closure from a closure-outcome selection prototype into a useful structured clinical closure record.
 
-The module should capture what happened during the visit, not merely classify the outcome.
+The module captures what happened during the visit without taking ownership of Shared Visit lifecycle, Treatment Planning, Performed Procedure, Clinical Workspace, Dental Chart, or Clinical Record History.
 
 ## 2. Preserved lifecycle architecture
 
@@ -26,8 +53,7 @@ Shared Visit
 Ready for Closure
     ↓
 Clinical Closure
-    ↓
-Closure Outcome + closure record
+Closure Record
     ↓
 Shared Visit remains lifecycle owner
     ↓
@@ -35,6 +61,8 @@ Closed when the Shared Visit workflow explicitly performs closure
 ```
 
 Clinical Closure does not become the owner of Visit State.
+
+Saving a closure record does not automatically change Shared Visit Visit State.
 
 ## 3. Ownership
 
@@ -68,6 +96,7 @@ Clinical Closure does not become the owner of Visit State.
 - Planned Surface / Scope
 - Treatment Status
 - Current clinical context
+- Authoritative Performed Procedure data when available
 
 ### Clinical Closure does not own
 
@@ -79,22 +108,20 @@ Clinical Closure does not become the owner of Visit State.
 - Clinical Record History presentation
 - billing
 - insurance
+- scheduling
+- queue management
 
 ## 4. Relationship to Performed Procedure
 
-This proposal introduces a strict distinction between:
-
-**Closure documentation** and **Performed Procedure record ownership**.
+Clinical Closure maintains a strict distinction between closure documentation and Performed Procedure record ownership.
 
 Clinical Closure may capture a concise actual-work summary needed to explain the closure decision, but it must not become a second Performed Procedure editor.
 
-If the closure workflow needs a complete finalized procedure record, that record remains owned by Performed Procedure.
-
-The closure fields must therefore be limited to information necessary to explain the current closure decision and should reference existing procedure data wherever possible.
+If authoritative Performed Procedure data exists, Clinical Closure should reference it rather than require duplicate entry.
 
 ## 5. Core closure record
 
-Every saved closure should contain, at minimum:
+Every saved closure contains, at minimum:
 
 1. Closure Outcome
 2. Clinical Closure Summary
@@ -109,47 +136,38 @@ Where clinically relevant, the closure record may additionally contain:
 8. Complications / Exceptions
 9. Patient Tolerance
 
-The system should avoid requiring duplicate entry when authoritative procedure data already exists.
-
 ## 6. Conditional outcome behavior
 
 ### Completed as Planned
 
 Required:
 - Closure Outcome
-- Closure Summary
+- Actual Work / Procedure when work occurred
+- Clinical Closure Summary
 - Provider
 - Date / Time
-
-Optional when needed:
-- actual procedure
-- actual site/scope
-- complications
-- patient tolerance
 
 ### Completed with Modification
 
 Required:
 - Closure Outcome
-- What changed / modification classification
+- Actual Work / Procedure
+- Modification Classification
 - Modification Reason
 - Closure Summary
 - Provider
 - Date / Time
-
-The modification must describe the difference between planned and actual work without becoming a replacement Treatment Planning editor.
 
 ### Not Completed
 
 Required:
 - Closure Outcome
 - Not Completed Reason
-- Next Step / Follow-up Context when applicable
 - Closure Summary
 - Provider
 - Date / Time
 
-The outcome must not silently mark the treatment as completed.
+If partial clinical work occurred, bounded Actual Work / Procedure documentation is required/reference-populated.
 
 ### Treatment Continues
 
@@ -157,57 +175,52 @@ Required:
 - Closure Outcome
 - Completed Today / Current Work Summary
 - Remaining Treatment / Continuation Context
-- Next Planned Procedure or Next Step when known
 - Closure Summary
 - Provider
 - Date / Time
 
-This explicitly preserves the multi-visit treatment model.
+Next Planned Procedure / Next Step is captured when known.
 
 ## 7. Clinical Closure Summary
 
-The closure record should contain a structured human-readable summary.
+The closure record contains a concise human-readable summary.
 
-The summary may be generated from structured fields and then reviewed/edited by the dentist.
+The summary may be generated from captured structured values and then reviewed and edited by the provider before save.
 
-Example:
-
-> Composite restoration completed on tooth #46, occlusal surface. Procedure completed as planned. Occlusion checked. Patient tolerated procedure well. No complications noted.
-
-The summary is a Clinical Closure record, not a replacement for the general Clinical Workspace notes.
+It is a Clinical Closure record, not a replacement for general Clinical Workspace notes.
 
 ## 8. Provider and timestamp
 
-A saved closure must have attributable authorship and timing.
+A saved closure is attributable at save time.
 
 Minimum metadata:
 
-- Provider
-- Created / Saved Date-Time
+- Provider/user
+- Saved timestamp
 
-If the application later supports record revision, revision metadata should be defined separately rather than inferred in this proposal.
+Full revision history is out of scope and requires a separate approved specification.
 
 ## 9. Conditional fields
 
-Conditional fields must appear only when the selected Closure Outcome requires them.
+Only fields relevant to the selected Closure Outcome appear in the user workflow.
 
-Do not display every possible field simultaneously.
-
-This keeps the closure workflow concise while preserving clinical completeness.
+The implementation must not display every possible outcome-specific field simultaneously.
 
 ## 10. Save semantics
 
-`Save Closure Outcome` should evolve into a save action for the complete closure record.
+The canonical v1.3 action is:
 
-The save operation must validate required conditional fields before saving.
+`Save Closure Record`
 
-Saving the closure record does not automatically mutate Shared Visit Visit State unless a separate approved interaction contract authorizes that behavior.
+Save validates the complete closure record and records the Clinical Closure data.
+
+Save does not automatically mutate Shared Visit Visit State or any other module unless a future separately approved interaction contract authorizes that behavior.
 
 ## 11. Cancel semantics
 
 Cancel abandons unsaved closure edits.
 
-It must not:
+It does not:
 
 - mutate Shared Visit
 - mutate Treatment Planning
@@ -215,22 +228,9 @@ It must not:
 - create Clinical Record History data
 - alter Dental Chart state
 
-## 12. Auditability
+## 12. Seven-region architecture
 
-The closure record should be attributable at save time.
-
-Required minimum audit metadata:
-
-- provider/user
-- saved timestamp
-
-A full revision history is out of scope for this proposal unless separately specified.
-
-## 13. Seven-region architecture
-
-The existing seven-region architecture is preserved.
-
-The proposed functional content maps as follows:
+Exactly seven top-level regions remain:
 
 1. **Clinical Closure Header** — patient/module identity
 2. **Visit Context** — Shared Visit read-only context
@@ -240,21 +240,24 @@ The proposed functional content maps as follows:
 6. **Downstream Handoff** — Shared Visit lifecycle boundary and next-step context
 7. **Closure Actions** — Save Closure Record and Cancel
 
-No new top-level region is required.
+No new top-level region is required for v1.3 conditional fields.
 
-## 14. Design-system boundary
+## 13. Design-system boundary
 
 Use genuine existing SmileFlow components.
 
-Do not modify shared component definitions merely to support Clinical Closure v1.3.
+No shared component definitions, variants, variables, styles, tokens, typography, or icons are modified for Clinical Closure-specific vocabulary.
 
-Consumer-owned vocabulary remains consumer-owned.
+The approved implementation uses:
 
-If a required field or component cannot be represented using existing approved components, stop at preflight and report the blocker.
+- Functional Select Field for Closure Outcome
+- approved Button component for Save Closure Record and Cancel
+- approved Multiline Text Field for Clinical Closure Summary
+- existing field/text patterns for read-only and conditional context
 
-## 15. Explicit exclusions
+## 14. Explicit exclusions
 
-This proposal does not authorize:
+This architecture does not authorize:
 
 - automatic Visit State mutation
 - automatic `Close Visit`
@@ -262,7 +265,7 @@ This proposal does not authorize:
 - treatment completion
 - Performed Procedure replacement or duplication
 - Dental Chart mutation
-- Clinical Record History editing
+- Clinical Record History editing/creation
 - billing
 - insurance
 - scheduling
@@ -271,7 +274,7 @@ This proposal does not authorize:
 - AI-generated clinical decisions
 - full audit/revision history
 
-## 16. Proposed Phase 1.3 invariants
+## 15. v1.3 invariants
 
 1. Option A lifecycle remains intact.
 2. Shared Visit remains sole owner of Visit State.
@@ -284,26 +287,29 @@ This proposal does not authorize:
 9. Exactly seven top-level regions remain.
 10. Existing design-system components remain unchanged.
 11. No automatic downstream lifecycle mutation is introduced.
-12. No Figma modification occurs until this proposal is approved, a field specification is approved, and a new preflight passes.
+12. The v1.3 Figma implementation remains bounded by the approved QA authorization.
 
-## 17. Required next gates
+## 16. Gate state
 
-Before implementation:
+The v1.3 gate sequence is now:
 
-1. Approve or revise this v1.3 architecture proposal.
-2. Author `FIELD_SPECIFICATION_V1_3.md` from the approved architecture.
-3. Run a read-only cross-module dependency audit against v1.3.
-4. Run a strict read-first Clinical Closure v1.3 Figma Preflight.
-5. Obtain explicit Figma implementation authorization.
-6. Implement only the approved bounded changes.
-7. Structural QA.
-8. Visual/UX Audit.
-9. Functional Prototype QA.
-10. Final QA.
-11. Freeze only after explicit authorization.
+1. v1.3 architecture approval — **APPROVED**
+2. Field specification approval — **APPROVED / RECONCILED**
+3. Cross-module dependency audit — **PASS**
+4. Strict Figma preflight — **PASS**
+5. Figma implementation authorization — **AUTHORIZED**
+6. Functional QA construction — **COMPLETE**
+7. Functional Prototype QA — **PASS**
+8. Structural / Visual QA — **PASS**
+9. Final QA — **PENDING DOCUMENTATION RECONCILIATION COMPLETION**
+10. Canonicalization / freeze — **NOT YET AUTHORIZED**
 
-## 18. Baseline protection
+The remaining gate is documentation consistency, not an architectural or Figma blocker.
 
-The current v1.2 canonical implementation remains the baseline while this proposal is under review.
+## 17. Historical baseline protection
 
-No v1.2 behavior is to be removed or changed merely because this proposal exists.
+The v1.2 canonical implementation was protected during the v1.3 work.
+
+No v1.2 behavior was removed merely because v1.3 was introduced.
+
+The approved v1.3 construction does not authorize production runtime behavior.
