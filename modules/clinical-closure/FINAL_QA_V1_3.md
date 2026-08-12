@@ -6,7 +6,7 @@
 
 Date: 2026-08-12
 
-Final QA was re-run after Repository Documentation Reconciliation v1.3. The authoritative architecture, field specification, approval record, Figma implementation, and Functional QA state are now aligned.
+Final QA was re-run after Repository Documentation Reconciliation v1.3. The authoritative architecture, field specification, approval record, Figma implementation, and Functional QA state are aligned.
 
 ## Executive result
 
@@ -16,32 +16,32 @@ No remaining architecture, field-specification, implementation, functional-QA, o
 
 ## Final QA matrix
 
-| Gate | Result | Evidence |
-|---|---|---|
-| Architecture status alignment | **PASS** | `ARCHITECTURE_V1_3_PROPOSAL.md` is APPROVED / IMPLEMENTED |
-| Field specification status alignment | **PASS** | `FIELD_SPECIFICATION_V1_3.md` is APPROVED / RECONCILED |
-| Approval record | PASS | `V1_3_APPROVAL.md` explicitly authorizes bounded implementation |
-| Seven-region architecture | PASS | Canonical `220:1294` has exactly 7 top-level regions |
-| Auto Layout integrity | PASS | Canonical root and seven regions preserve vertical structure |
-| Closure Outcome vocabulary | PASS | Exactly four approved values in approved order |
-| Genuine Functional Select Field | PASS | Canonical Closure Outcome uses approved component `236:1819` |
-| Genuine Multiline Text Field | PASS | Canonical Summary uses approved multiline component |
-| Genuine Save button | PASS | Primary button main component `35:99` |
-| Genuine Cancel button | PASS | Secondary button main component `35:129` |
-| Save action vocabulary | PASS | Canonical label is `Save Closure Record` |
-| Shared menu vocabulary isolation | PASS | Menu contains only the four Clinical Closure outcomes |
-| Seven-region placement | PASS | v1.3 additions remain within existing regions |
-| Protected canonical boundary | PASS | Protected nodes `207:1291` and `220:1294` remain protected; no QA construction replaces the canonical frame |
-| Functional QA harness | PASS | Dedicated QA page `356:1197` |
-| Functional Prototype QA | PASS | `CC-FQ-01` through `CC-FQ-10` passed |
-| External prototype routes | PASS | QA harness remains bounded to its dedicated page |
-| Forbidden Close Visit behavior | PASS | No Close Visit control/route authorized or present in QA harness |
-| Shared Visit mutation | PASS | No automatic lifecycle mutation route exists |
-| Treatment Planning mutation | PASS | No mutation route exists |
-| Performed Procedure duplication boundary | PASS | Architecture and QA preserve Performed Procedure ownership |
-| Clinical Record History boundary | PASS | No history-editing behavior introduced |
-| Visual/structural composition | PASS | Canonical frame remains 920×1851 with seven-region vertical structure |
-| Documentation synchronization | **PASS** | Architecture, field specification, approval, README, and Final QA now agree |
+| Gate | Result |
+|---|---|
+| Architecture status alignment | **PASS** |
+| Field specification status alignment | **PASS** |
+| Approval record | **PASS** |
+| Seven-region architecture | **PASS** |
+| Auto Layout integrity | **PASS** |
+| Closure Outcome vocabulary | **PASS** |
+| Genuine Functional Select Field | **PASS** |
+| Genuine Multiline Text Field | **PASS** |
+| Genuine Save button | **PASS** |
+| Genuine Cancel button | **PASS** |
+| Save action vocabulary | **PASS** |
+| Shared menu vocabulary isolation | **PASS** |
+| Seven-region placement | **PASS** |
+| Protected canonical boundary | **PASS** |
+| Functional QA harness | **PASS** |
+| Functional Prototype QA | **PASS** |
+| External prototype routes | **PASS** |
+| Forbidden Close Visit behavior | **PASS** |
+| Shared Visit mutation | **PASS** |
+| Treatment Planning mutation | **PASS** |
+| Performed Procedure duplication boundary | **PASS** |
+| Clinical Record History boundary | **PASS** |
+| Visual/structural composition | **PASS** |
+| Documentation synchronization | **PASS** |
 
 ## Canonical Figma verification
 
@@ -106,22 +106,22 @@ Verified terminal behavior:
 
 ## Documentation reconciliation verification
 
-The former Final QA blocker has been resolved.
+The former Final QA blocker was resolved before canonicalization.
 
 Current authoritative statuses are:
 
 ```text
 ARCHITECTURE_V1_3_PROPOSAL.md
-    APPROVED — IMPLEMENTED — FINAL QA DOCUMENTATION RECONCILED
+    APPROVED — CANONICALIZED — FROZEN
 
 FIELD_SPECIFICATION_V1_3.md
-    APPROVED — RECONCILED — IMPLEMENTED FOR BOUNDED QA
+    APPROVED — CANONICALIZED — FROZEN
 
 V1_3_APPROVAL.md
     APPROVED — Figma implementation authorized
 
 README.md
-    v1.3 APPROVED — FUNCTIONAL QA PASS — FINAL QA PASS
+    v1.3 CANONICALIZED — FROZEN
 ```
 
 No stale `PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED` gate remains in the authoritative v1.3 source documents.
@@ -130,10 +130,12 @@ No stale `PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED` gate remains 
 
 **Clinical Closure v1.3 FINAL QA: PASS**
 
-The implementation is ready for the next governance decision.
+The existing canonical Figma frame is the authoritative frozen v1.3 baseline.
 
-### Important boundary
+Canonicalization / freeze is separately authorized and recorded in `CANONICALIZATION_FREEZE_AUTHORIZATION_V1_3.md`.
 
-Final QA PASS does **not** itself authorize canonicalization, production/backend implementation, automatic lifecycle mutation, or freeze.
+## Post-freeze boundary
 
-The next gate is a separate **Canonicalization / Freeze Authorization** decision.
+Final QA and canonicalization/freeze do not authorize production/backend implementation, automatic Shared Visit mutation, Treatment Planning mutation, Performed Procedure creation, Clinical Record History creation, scheduling, queue behavior, or `Close Visit` behavior.
+
+Any future change to the frozen v1.3 baseline must begin as a new versioned change proposal and follow the required dependency, preflight, authorization, QA, and re-freeze sequence.
