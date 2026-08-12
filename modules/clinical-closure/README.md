@@ -1,11 +1,21 @@
 # Clinical Closure
 
-Status: FIELD SPECIFICATION DRAFT FOR APPROVAL
+## Status
 
-The approved Architecture & Information Model is recorded in `ARCHITECTURE.md`.
+FIELD SPECIFICATION APPROVED — Figma implementation NOT AUTHORIZED
 
-The precise Phase 1 field-level contract is drafted in `FIELD_SPECIFICATION.md` and is **not yet approved**.
+## Current source artifacts
 
-Do not implement Clinical Closure in Figma until the field specification is explicitly approved and the SmileFlow Figma Preflight protocol passes.
+- `ARCHITECTURE.md` — APPROVED
+- `FIELD_SPECIFICATION.md` — APPROVED — Phase 1 source of truth
+- Figma preflight — NOT STARTED
+- Figma implementation — NOT IMPLEMENTED
+- Structural QA — NOT STARTED
+- Visual/UX Audit — NOT STARTED
+- Freeze — NOT FROZEN
 
-No Figma changes are authorized by these repository documents alone.
+The approved field specification defines the Phase 1 implementation contract. It does not authorize a Figma write by itself.
+
+Before implementation, run the SmileFlow Figma Preflight protocol and obtain explicit implementation authorization.
+
+If implementation reveals a material problem with the approved contract, stop and return to repository-level brainstorming/revision. Do not silently alter the approved specification or improvise behavior in Figma.
