@@ -21,12 +21,13 @@ When two sources appear to disagree, use this order:
 5. **`governance/FROZEN_MODULES.md`** for frozen-module protection
 6. **`governance/ARCHITECTURE_EXCEPTIONS.md`** for authorized departures from normal architecture/freeze rules
 7. **`DESIGN.md`** for global design-system and Figma rules
-8. **Module `AGENTS.md`** files for local operating constraints
-9. **Root `AGENTS.md`** for project-wide Codex operating rules
-10. **Current Figma implementation** as implementation evidence only
-11. **Implementation reports and visual/UX audits** as phase evidence only
-12. **README.md and templates** as navigation/documentation aids
-13. **External references** as non-authoritative references only
+8. **`governance/FIGMA_PREFLIGHT.md`** for the mandatory Figma implementation gate
+9. **Module `AGENTS.md`** files for local operating constraints
+10. **Root `AGENTS.md`** for project-wide Codex operating rules
+11. **Current Figma implementation** as implementation evidence only
+12. **Implementation reports and visual/UX audits** as phase evidence only
+13. **README.md and templates** as navigation/documentation aids
+14. **External references** as non-authoritative references only
 
 A lower-ranked source must never silently override a higher-ranked source.
 
@@ -45,6 +46,7 @@ A lower-ranked source must never silently override a higher-ranked source.
 | Global design-system rules | `DESIGN.md` |
 | Frozen-module protection | `governance/FROZEN_MODULES.md` |
 | Architecture exceptions | `governance/ARCHITECTURE_EXCEPTIONS.md` |
+| Figma implementation gate | `governance/FIGMA_PREFLIGHT.md` |
 | Implementation result | `modules/<module>/IMPLEMENTATION_REPORT.md` |
 | Structural QA result | Module QA artifact when present; otherwise implementation evidence |
 | Visual/UX audit result | `modules/<module>/VISUAL_UX_AUDIT.md` |
@@ -239,6 +241,7 @@ Before any SmileFlow Figma write, Codex must be able to answer all of the follow
 - Which existing Figma components must be reused?
 - Which modules/components/tokens are protected from modification?
 - What QA and audit obligations follow the change?
+- Has `governance/FIGMA_PREFLIGHT.md` been satisfied?
 
 If any answer cannot be established safely, stop before writing to Figma.
 
