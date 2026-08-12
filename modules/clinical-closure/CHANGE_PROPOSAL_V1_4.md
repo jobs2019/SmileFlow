@@ -2,15 +2,15 @@
 
 ## Status
 
-**PROPOSED — NOT APPROVED**
+**DEFERRED — EXPERIENCE-FIRST**
 
-This document initializes the v1.4 change process. It does not authorize Figma writes, canonical implementation, modification of the frozen v1.3 baseline, or backend/production behavior.
+This proposal is intentionally paused. No v1.4 feature, field, architecture change, Figma write, canonical implementation, or backend/production behavior is authorized.
 
 ## Frozen Baseline
 
 Clinical Closure v1.3 is the current frozen baseline.
 
-The v1.3 baseline must remain unchanged while this proposal is evaluated.
+The v1.3 baseline must remain unchanged while v1.4 is deferred.
 
 ### Baseline governance
 
@@ -20,128 +20,118 @@ The v1.3 baseline must remain unchanged while this proposal is evaluated.
 - Final QA: PASS
 - Canonicalization: COMPLETE
 
-## Purpose of this proposal
+## Reason for Deferral
 
-Provide a controlled place to define, evaluate, and either reject or approve improvements to Clinical Closure after v1.3 freeze.
+The team has not yet experienced the complete SmileFlow workflow as an integrated product. It would be premature to define v1.4 improvements based only on anticipated problems.
 
-The proposal deliberately separates the **problem/change request** from the eventual architecture, field, Figma, and functional solution.
+The preferred product-development sequence is to finish the current SmileFlow baseline first, experience the system as an actual user, observe concrete workflow friction or missing capabilities, and only then propose evidence-based changes.
 
-## Proposed Change
+## Experience-First Principle
 
-**PENDING DEFINITION**
+> **Finish the baseline. Experience it. Observe real problems. Then improve it.**
 
-No specific v1.4 feature or field is authorized yet.
+v1.4 must not become an exercise in inventing improvements to a module that has not yet been used within the complete SmileFlow workflow.
 
-## Problem
+## Deferred Change Definition
 
-**PENDING DEFINITION**
+The following remain intentionally undefined until real usage provides evidence:
 
-Describe the concrete limitation, workflow friction, missing capability, ambiguity, or newly discovered requirement in the frozen v1.3 baseline.
+- Proposed Change
+- Problem
+- Why v1.3 Is Insufficient
+- Proposed Behavior
+- User / Clinical Benefit
+- Affected Areas
+- Ownership Impact
+- Backward Compatibility
+- Risks
+- Acceptance Criteria
 
-## Why v1.3 Is Insufficient
+No assumptions should be converted into v1.4 requirements merely to advance the version number.
 
-**PENDING DEFINITION**
+## What Happens Before v1.4
 
-Explain why the current frozen behavior cannot adequately address the identified problem.
+The project should continue completing the remaining SmileFlow baseline modules and their required integration boundaries without speculative enhancement.
 
-## Proposed Behavior
+The baseline-completion workflow should prioritize:
 
-**PENDING DEFINITION**
+1. repository/module inventory;
+2. dependency and ownership verification;
+3. authoritative architecture/specification where missing;
+4. read-first Figma preflight;
+5. bounded implementation;
+6. Functional QA;
+7. Visual / UX QA;
+8. Final QA;
+9. canonicalization/freeze where authorized.
 
-Describe the desired behavior conceptually only. Do not define final UI geometry, component structure, implementation details, or backend behavior at this stage.
+## Experience Phase
 
-## User / Clinical Benefit
+After the baseline modules are sufficiently complete, the team should perform an end-to-end SmileFlow walkthrough using realistic clinical workflow scenarios.
 
-**PENDING DEFINITION**
+The experience phase should record observations such as:
 
-Describe the expected improvement for the clinician, patient record, workflow clarity, or downstream safety.
+- duplicated data entry;
+- unclear ownership or responsibility;
+- confusing workflow transitions;
+- missing clinical context;
+- unnecessary fields or steps;
+- insufficient visibility;
+- awkward handoffs between modules;
+- incorrect timing of a module in the workflow;
+- unexpected behavior;
+- clinically useful information that is unavailable at the point of decision.
 
-## Affected Areas
+These observations become evidence for future change proposals.
 
-To be assessed during the v1.4 impact audit:
+## Evidence Rule
 
-- Architecture
-- Field specification
-- Figma composition
-- Functional behavior
-- Design-system components
-- Shared Visit
-- Treatment Planning
-- Performed Procedure
-- Clinical Record History
-- Dental Chart
-- Scheduling / Queue
-- Data ownership
+A future v1.4 proposal should preferably originate from an observed problem in the completed SmileFlow workflow rather than an assumed improvement.
 
-## Ownership Impact
+The evidence should describe:
 
-| Area | Impact | Decision |
-|---|---|---|
-| Clinical Closure | TBD | PENDING |
-| Shared Visit | TBD | PENDING |
-| Treatment Planning | TBD | PENDING |
-| Performed Procedure | TBD | PENDING |
-| Clinical Record History | TBD | PENDING |
-| Dental Chart | TBD | PENDING |
-| Scheduling / Queue | TBD | PENDING |
+- what the user attempted to accomplish;
+- what the user expected;
+- what actually happened;
+- why the difference matters;
+- which module or boundary is implicated.
 
-No ownership change is approved by this document.
+## Protected Scope
 
-## Backward Compatibility
+While this proposal is deferred, there is no authorization to:
 
-**PENDING DEFINITION**
+- modify frozen Clinical Closure v1.3;
+- modify the canonical Figma frame;
+- modify shared components;
+- change the four canonical Closure Outcome values;
+- change the seven-region architecture;
+- change ownership boundaries;
+- introduce backend/API behavior;
+- introduce automatic Shared Visit mutation;
+- introduce automatic Treatment Planning mutation;
+- introduce automatic Performed Procedure creation;
+- introduce automatic Clinical Record History creation;
+- introduce `Close Visit` behavior;
+- introduce scheduling or queue behavior.
 
-The v1.4 proposal must explicitly state whether existing v1.3 behavior remains valid and whether migration or compatibility considerations are required.
+## Resume Condition
 
-## Risks
+Resume v1.4 only when at least one concrete, evidence-based problem has been observed during actual SmileFlow use or a clearly established baseline workflow review.
 
-**PENDING DEFINITION**
+At that point:
 
-Risks will be evaluated after the concrete change request is defined.
-
-## Out of Scope
-
-Unless separately proposed and approved, v1.4 does not authorize:
-
-- modification of the frozen v1.3 baseline;
-- shared-component changes;
-- backend/API implementation;
-- automatic Shared Visit mutation;
-- automatic Treatment Planning mutation;
-- automatic Performed Procedure creation;
-- automatic Clinical Record History creation;
-- `Close Visit` behavior;
-- scheduling or queue behavior;
-- unrelated clinical modules.
-
-## Acceptance Criteria
-
-**PENDING DEFINITION**
-
-Acceptance criteria will be written only after the proposed problem and intended behavior are understood and audited.
-
-## Required Next Gate
-
-The next step is:
-
-**Clinical Closure v1.4 — Read-Only Change Impact & Dependency Audit**
-
-The audit must determine whether the proposed change affects the architecture, field specification, design system, Figma implementation, cross-module ownership, or any protected boundary.
-
-No Figma write is authorized before that audit and a subsequent explicit implementation authorization.
+1. record the observation;
+2. define the v1.4 change proposal;
+3. run the Read-Only Change Impact & Dependency Audit again;
+4. determine whether architecture/specification changes are actually necessary;
+5. proceed through the normal versioned implementation gates only if justified.
 
 ## Decision
 
-**PENDING**
+**DEFERRED — EXPERIENCE-FIRST**
 
-Possible outcomes:
+v1.3 remains the authoritative frozen Clinical Closure baseline.
 
-1. Reject the proposal and retain v1.3 unchanged.
-2. Revise the proposal and re-audit.
-3. Approve the proposal for v1.4 specification work.
+## Date
 
-## Rule
-
-**v1.3 remains frozen unless and until a separately authorized v1.4 change supersedes it.**
-
-Date initialized: 2026-08-12
+2026-08-12
