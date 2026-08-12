@@ -1,7 +1,7 @@
 # Clinical Closure — Status
 
 ## Current status
-**CANONICAL IMPLEMENTATION VERIFIED — QA RE-RUN REQUIRED — NOT FROZEN**
+**CANONICAL IMPLEMENTATION VERIFIED — FINAL QA PASS — NOT FROZEN**
 
 ## Authority
 - Architecture: APPROVED
@@ -23,7 +23,7 @@ Current canonical implementation:
 - Node: `331:1366`
 - Dimensions: `920 × 1376 px`
 
-Status: **CANONICAL — IMPLEMENTED — QA RE-RUN REQUIRED — NOT FROZEN**
+Status: **CANONICAL — IMPLEMENTED — FINAL QA PASS — NOT FROZEN**
 
 ## Gate status
 
@@ -33,8 +33,26 @@ Status: **CANONICAL — IMPLEMENTED — QA RE-RUN REQUIRED — NOT FROZEN**
 - Gate 4 — Canonical Implementation Verification: PASS
 - Gate 5 — Repository Synchronization: PASS
 - Specification v1.1 amendment: PASS
-- Final QA: **RE-RUN REQUIRED**
+- Final QA: **PASS**
 - Freeze: NOT AUTHORIZED
+
+## Final QA result
+
+Final QA was re-run against the effective v1.1 contract and passed.
+
+Verified:
+
+- exactly seven canonical top-level regions in the implemented architecture;
+- canonical node identity `331:1366`;
+- genuine Functional Select Field component set;
+- all four approved Closure Outcome variants;
+- genuine existing Save and Cancel Button components;
+- Save reaction is local-only QA behavior to a Saved validation state;
+- Cancel reaction is local-only QA behavior to a Cancelled validation state;
+- no prohibited clinical actions or cross-module mutation controls;
+- protected legacy node `220:1294` remains untouched.
+
+The final QA run intentionally treats the prototype reactions as valid only because of the approved v1.1 amendment. They do not authorize production navigation, persistence beyond the local closure decision, or clinical-state mutation.
 
 ## Local prototype validation
 
@@ -86,6 +104,7 @@ Clinical Closure may only be added to the frozen module registry after a separat
 
 - `FIELD_SPECIFICATION.md`
 - `FIELD_SPECIFICATION_V1.1_AMENDMENT.md`
+- `FINAL_QA_V1.1.md`
 - `CANONICALIZATION_PLAN.md`
 - `CANONICAL_NAME_RESOLUTION.md`
 - `CANONICAL_VERIFICATION_V1.md`
