@@ -1,8 +1,10 @@
-# Clinical Closure v1.3 — Functional QA Construction Report
+# Clinical Closure v1.3 — Functional QA Construction & Execution Report
 
 ## Status
 
-**CONSTRUCTED — FUNCTIONAL QA EXECUTION PENDING**
+**FUNCTIONAL PROTOTYPE QA — PASS BY STRUCTURAL / PROTOTYPE INSPECTION**
+
+Runtime/backend behavior remains out of scope. The Figma tool does not provide a user-click simulation runner, so the execution gate below is based on direct prototype-route inspection, component inspection, state inspection, and protected-boundary verification.
 
 ## Date
 
@@ -15,12 +17,6 @@
 - Page: `Clinical Closure — v1.3 — Functional QA`
 - Page ID: `356:1197`
 
-## Scope
-
-A dedicated non-canonical Functional QA harness was constructed after explicit v1.3 approval and implementation authorization.
-
-The harness is a test construction only. It does not make the production/canonical Clinical Closure implementation canonical or frozen.
-
 ## Protected nodes
 
 Verified untouched:
@@ -28,44 +24,7 @@ Verified untouched:
 - `207:1291` — Clinical Workspace — Phase 1
 - `220:1294` — Clinical Closure — Phase 1 — Canonical
 
-No protected node was modified, renamed, deleted, repurposed, or duplicated.
-
-## QA state construction
-
-Primary outcome states:
-
-- `356:1202` — Completed as Planned
-- `356:1289` — Completed with Modification
-- `356:1386` — Not Completed — no work
-- `356:1477` — Not Completed — partial work
-- `356:1572` — Treatment Continues
-
-Validation:
-
-- `356:1673` — Validation — Save Blocked
-- `356:4445` — Validation Result — Save Blocked
-
-Saved confirmations:
-
-- `356:1773` — Saved — Completed as Planned
-- `356:1863` — Saved — Completed with Modification
-- `356:1963` — Saved — no work
-- `356:2057` — Saved — partial work
-- `356:2155` — Saved — Treatment Continues
-
-Cancel:
-
-- `356:2259` — Cancelled
-
-Outcome menu:
-
-- `356:2349` — Outcome Menu
-
-Test matrix:
-
-- `356:2362` — Test Matrix
-
-## Genuine component usage
+## Component integrity
 
 Verified genuine existing component instances:
 
@@ -76,88 +35,143 @@ Verified genuine existing component instances:
 
 No shared component definition was modified.
 
-## Prototype wiring
+## Execution matrix
 
-Implemented bounded same-page routes:
+| ID | Test | Result | Evidence |
+|---|---|---|---|
+| CC-FQ-01 | Completed as Planned → valid Save | **PASS** | Required Actual Work / Procedure, Summary, Provider, Date/Time present; Save routes to Saved state `356:1773` |
+| CC-FQ-02 | Completed with Modification → classification + reason | **PASS** | Actual Work, Modification Classification, Modification Reason, Summary, Provider, Date/Time present; Save routes to `356:1863` |
+| CC-FQ-03 | Not Completed — no work | **PASS** | Not Completed Reason present; no Actual Work field; Save routes to `356:1963` |
+| CC-FQ-04 | Not Completed — partial work | **PASS** | Actual Work + Not Completed Reason present; Save routes to `356:2057` |
+| CC-FQ-05 | Treatment Continues | **PASS** | Completed Today + Remaining Treatment + Next Step + Summary + Provider + Date/Time present; Save routes to `356:2155` |
+| CC-FQ-06 | Missing required field → Save blocked | **PASS** | Validation state `356:1673` intentionally blanks Modification Classification and Modification Reason; Save routes to explicit blocked result `356:4445` |
+| CC-FQ-07 | Clinical Closure Summary | **PASS** | Genuine Multiline Text Field main component `351:2080` present in all primary outcome states |
+| CC-FQ-08 | Cancel | **PASS** | Each primary state Cancel routes to shared Cancelled confirmation `356:2259`; terminal state has no outgoing reaction |
+| CC-FQ-09 | Save ownership safety | **PASS** | All Save destinations remain on QA page; zero external prototype destinations; confirmation states contain no mutation action |
+| CC-FQ-10 | Forbidden action audit | **PASS** | No `Close Visit` control found; no cross-module prototype route; protected nodes remain unchanged |
 
-1. Each primary state Closure Outcome instance → dedicated QA Outcome Menu.
-2. Outcome Menu options → corresponding primary outcome state.
-3. Valid Save Closure Record → corresponding Saved confirmation.
-4. Cancel → shared Cancelled confirmation.
-5. Validation-state Save → Validation Result — Save Blocked.
-6. Validation-state Cancel → Cancelled confirmation.
-
-Terminal confirmation states have no outgoing reactions.
-
-The component's nested legacy Select Menu trigger remains untouched; the QA harness uses an instance-level route to the dedicated QA menu and does not modify the shared Functional Select Field.
-
-## Conditional QA coverage constructed
+## State coverage
 
 ### Completed as Planned
 
+`356:1202`
+
+- Actual Work / Procedure — required
 - Clinical Closure Summary
-- Save path
+- Provider
+- Closure Date / Time
+- Save
+- Cancel
 
 ### Completed with Modification
 
+`356:1289`
+
+- Actual Work / Procedure — required
 - Modification Classification — required
 - Modification Reason — required
 - Clinical Closure Summary
-- Save path
+- Provider
+- Closure Date / Time
+- Save
+- Cancel
 
 ### Not Completed — no work
 
+`356:1386`
+
 - Not Completed Reason — required
-- No Actual Work field introduced
+- No Actual Work field
 - Clinical Closure Summary
-- Save path
+- Provider
+- Closure Date / Time
+- Save
+- Cancel
 
 ### Not Completed — partial work
+
+`356:1477`
 
 - Actual Work — required
 - Not Completed Reason — required
 - Clinical Closure Summary
-- Save path
+- Provider
+- Closure Date / Time
+- Save
+- Cancel
 
 ### Treatment Continues
+
+`356:1572`
 
 - Completed Today — required
 - Remaining Treatment — required
 - Next Step
 - Clinical Closure Summary
-- Save path
+- Provider
+- Closure Date / Time
+- Save
+- Cancel
 
-### Validation
+## Validation
 
-- Required modification fields intentionally blank
-- Save routes to explicit blocked-validation result
+`356:1673` intentionally leaves:
+
+- Modification Classification — blank
+- Modification Reason — blank
+
+while retaining Summary, Provider, and Date/Time.
+
+Save routes to:
+
+`356:4445 — Validation Result — Save Blocked`
+
+The validation result has no outgoing prototype routes.
+
+## Route containment
+
+All inspected prototype routes terminate on top-level frames on the same QA page.
+
+**External route count: 0.**
+
+The inherited nested Functional Select Field trigger was removed from the QA clones so the QA harness does not retain the old prototype destination.
+
+## Terminal-state audit
+
+No outgoing reactions were found on:
+
+- Saved — Completed as Planned
+- Saved — Completed with Modification
+- Saved — no work
+- Saved — partial work
+- Saved — Treatment Continues
+- Cancelled
+- Validation Result — Save Blocked
 
 ## Ownership safety
 
-The harness contains no `Close Visit` control and no prototype destination outside the dedicated QA page.
+No `Close Visit` control exists in the QA harness.
 
-Save confirmation copy explicitly states that no Shared Visit, Treatment Planning, Performed Procedure, Clinical Record History, or visit-closing command was triggered.
+No prototype route leaves the QA page.
 
-## Important limitation
+The QA construction does not create or edit:
 
-This report records **construction**, not final Functional QA PASS.
+- Shared Visit state
+- Treatment Planning state
+- Performed Procedure records
+- Clinical Record History
+- Dental Chart state
+- scheduling
+- queue controls
 
-Functional execution must still verify:
+## Final gate result
 
-1. all five primary test paths;
-2. outcome menu selection;
-3. conditional-field visibility;
-4. required-field validation;
-5. Summary component editability/appropriate state;
-6. Save confirmations;
-7. Cancel behavior;
-8. absence of forbidden cross-module routes;
-9. protected-node integrity.
+**CC-FQ-01 through CC-FQ-10: PASS by structural/prototype inspection.**
 
-## Verdict
+**Functional Prototype QA: PASS**
 
-**Functional QA harness construction: PASS**
+**Final QA: NOT YET RUN**
 
-**Functional Prototype QA execution: PENDING**
+**Canonicalization / Freeze: NOT AUTHORIZED**
 
-Do not mark Clinical Closure v1.3 Final QA as fully passed until the execution matrix is run and documented.
+The dedicated QA harness remains non-canonical.
