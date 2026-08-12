@@ -66,14 +66,42 @@ The previous composition was not modified, deleted, renamed, duplicated, or repu
 
 Status: IMPLEMENTED — FINAL.
 
-## Clinical Closure — next module
-Architecture: DRAFT FOR APPROVAL
-Field Specification: NOT APPROVED
+## Clinical Closure — approved specification / not implemented
+Architecture: APPROVED
+Field Specification: APPROVED — Phase 1 source of truth
 Implementation: NOT IMPLEMENTED
+Figma preflight: NOT STARTED
+Structural QA: NOT STARTED
 Visual/UX Audit: NOT STARTED
 Freeze: NOT FROZEN
 
-The Clinical Closure architecture currently recorded at `modules/clinical-closure/ARCHITECTURE.md` is a draft for approval and does not authorize Figma implementation. No Clinical Closure Figma implementation should be inferred from historical state references.
+Canonical composition: `Clinical Closure — Phase 1 — Canonical`
+Recommended width: 920 px
+Exactly seven regions are required.
+
+Canonical demonstration state:
+- Visit State: `In Treatment`
+- Treatment Status: `In Progress`
+- Closure Outcome: `Completed as Planned`
+
+Exactly one editable domain field is authorized:
+- `Closure Outcome`
+
+Canonical closure outcomes:
+1. `Completed as Planned`
+2. `Completed with Modification`
+3. `Not Completed`
+4. `Treatment Continues`
+
+Authorized actions:
+- `Save Closure Outcome`
+- `Cancel`
+
+No automatic cross-module transition is authorized in Phase 1.
+
+The approved field specification does not itself authorize a Figma write. The SmileFlow Figma Preflight protocol and explicit implementation authorization are required before implementation.
+
+If implementation reveals a material problem with the approved contract, stop and return to repository-level brainstorming/revision rather than silently changing the approved specification or improvising behavior in Figma.
 
 ## Shared Visit
 Architecture: APPROVED
@@ -106,8 +134,8 @@ Canonical composition: `153:1204`
 - Frozen modules require an explicit Architecture Exception before modification.
 - The Clinical Workspace replacement exception was explicitly authorized for source-of-truth replacement and bounded Figma adoption.
 - Clinical Workspace replacement implementation and audits are complete and the canonical replacement is now frozen.
-- Clinical Closure is not currently approved for Figma implementation.
+- Clinical Closure has an approved Phase 1 architecture and field specification but is not authorized for Figma implementation until preflight and explicit implementation authorization are complete.
 - No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
 
 ## Next step
-Clinical Workspace Phase 1 — Canonical is frozen. Continue with the next explicitly authorized SmileFlow module/task.
+Clinical Closure Phase 1 — run strict read-first Figma Preflight. Do not modify Figma until preflight passes and implementation is explicitly authorized.
