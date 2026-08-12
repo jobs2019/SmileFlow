@@ -47,9 +47,9 @@ A lower-ranked source must never silently override a higher-ranked source.
 | Frozen-module protection | `governance/FROZEN_MODULES.md` |
 | Architecture exceptions | `governance/ARCHITECTURE_EXCEPTIONS.md` |
 | Figma implementation gate | `governance/FIGMA_PREFLIGHT.md` |
-| Implementation result | `modules/<module>/IMPLEMENTATION_REPORT.md` |
+| Implementation result | `modules/<module>/IMPLEMENTATION_REPORT.md` or the current module-specific implementation report identified by `PROJECT_STATE.md` |
 | Structural QA result | Module QA artifact when present; otherwise implementation evidence |
-| Visual/UX audit result | `modules/<module>/VISUAL_UX_AUDIT.md` |
+| Visual/UX audit result | `modules/<module>/VISUAL_UX_AUDIT.md` or the current module-specific audit identified by `PROJECT_STATE.md` |
 | Current module readiness/status | `modules/<module>/STATUS.md`, interpreted against `PROJECT_STATE.md` and governance |
 | Historical implementation evidence | Implementation reports/audits marked historical or superseded |
 | Repository orientation | `README.md` |
@@ -207,26 +207,59 @@ Never silently rewrite architecture, ownership, authorization, freeze state, or 
 
 ---
 
-## 13. Current Clinical Workspace exception
+## 13. Current Clinical Workspace state
 
-The current repository state contains an explicitly authorized Clinical Workspace architecture replacement.
+The repository contains an explicitly authorized Clinical Workspace architecture replacement, and that replacement is now implemented, audited, and frozen.
 
 Authoritative current state:
 
 - Replacement architecture: `modules/clinical-workspace/ARCHITECTURE.md`
 - Replacement field specification: `modules/clinical-workspace/FIELD_SPECIFICATION.md`
 - Canonical composition: `Clinical Workspace — Phase 1 — Canonical`
-- Replacement Figma implementation: **NOT IMPLEMENTED**
-- Figma preflight: **NOT STARTED**
-- Freeze: **NOT READY**
+- Canonical Figma node: `328:1919`
+- Replacement Figma implementation: **COMPLETE**
+- Figma preflight: **PASS**
+- Structural QA: **PASS**
+- Visual/UX Audit: **PASS**
+- Freeze: **FROZEN**
 
-The previous `Clinical Workspace — Phase 1` Figma composition is historical/protected and is not the source of truth for the replacement architecture.
+The previous `Clinical Workspace — Phase 1` Figma composition at `207:1291` is historical/protected and remains untouched.
 
-The next authorized operation is the strict Clinical Workspace Figma preflight. No Figma modification is authorized merely by the existence of the architecture exception.
+No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
 
 ---
 
-## 14. Required interpretation behavior
+## 14. Current Clinical Closure state
+
+Clinical Closure Phase 1 is the current canonical implementation following the approved architecture and field specification.
+
+Authoritative current state:
+
+- Architecture: **APPROVED**
+- Field Specification: **APPROVED**
+- Canonical composition: `Clinical Closure — Phase 1 — Canonical`
+- Implementation: **COMPLETE**
+- Figma preflight: **PASS**
+- Structural QA: **PASS**
+- Visual/UX Audit: **PASS**
+- Final QA: **PASS**
+- Freeze: **NOT FROZEN**
+
+Clinical Closure being not frozen does not itself authorize additional Figma writes. Any future modification still requires repository interpretation, applicable preflight, and explicit implementation authorization.
+
+---
+
+## 15. Documentation completeness note
+
+The current repository ledger and frozen registry identify Performed Procedure and Clinical Record History as complete/frozen, but their module directories currently expose only `AGENTS.md` in the repository inventory inspected during the August 12, 2026 state reconciliation.
+
+This is a **documentation completeness/readiness issue**, not evidence that those modules are writable or that their frozen status should be removed.
+
+Before future implementation work involving either module, their authoritative architecture, field specification, and implementation evidence must be located, restored, or explicitly reconciled.
+
+---
+
+## 16. Required interpretation behavior
 
 Before any SmileFlow Figma write, Codex must be able to answer all of the following from the repository:
 
@@ -247,7 +280,7 @@ If any answer cannot be established safely, stop before writing to Figma.
 
 ---
 
-## 15. Non-authoritative convenience rule
+## 17. Non-authoritative convenience rule
 
 Convenience does not change authority.
 
@@ -257,7 +290,7 @@ Authority is determined by the rules in this document, not by convenience.
 
 ---
 
-## 16. Maintenance rule
+## 18. Maintenance rule
 
 When the repository governance model changes, update this document in the same change set as the governance change whenever practical.
 
