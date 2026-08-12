@@ -2,50 +2,57 @@
 
 ## Status
 
-**v1.3 APPROVED — FUNCTIONAL PROTOTYPE QA PASS — FINAL QA PENDING**
+**v1.3 APPROVED — FUNCTIONAL QA PASS — FINAL QA BLOCKED BY DOCUMENTATION DRIFT**
 
 ## Current source artifacts
 
 - `ARCHITECTURE.md` — APPROVED architecture baseline
-- `ARCHITECTURE_V1_3_PROPOSAL.md` — v1.3 approved source
-- `FIELD_SPECIFICATION_V1_3.md` — v1.3 approved source
+- `ARCHITECTURE_V1_3_PROPOSAL.md` — v1.3 source; **status text requires reconciliation to approved state**
+- `FIELD_SPECIFICATION_V1_3.md` — v1.3 source; **status text requires reconciliation to approved state**
 - `V1_3_APPROVAL.md` — approval and bounded implementation authorization
-- `CROSS_MODULE_DEPENDENCY_AUDIT_V1_3.md` — PASS
+- `CROSS_MODULE_DEPENDENCY_AUDIT_V1_3.md` — PASS with historical documentation-alignment note
 - `FIGMA_PREFLIGHT_V1_3_RERUN.md` — PASS / implementation-ready
 - `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION.md` — QA construction specification
-- `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION_REPORT.md` — construction + execution report
+- `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION_REPORT.md` — construction report
+- `FINAL_QA_V1_3.md` — current final QA result
 
 ## Figma state
 
 - Figma file: SmileFlow Foundations v1.0
-- QA page: `Clinical Closure — v1.3 — Functional QA`
-- QA page ID: `356:1197`
+- Canonical frame: `Clinical Closure — Phase 1 — Canonical` (`220:1294`)
+- QA page: `Clinical Closure — v1.3 — Functional QA` (`356:1197`)
 - Dedicated QA harness: CONSTRUCTED
-- Functional Prototype QA: **PASS by structural/prototype inspection**
-- Final QA: PENDING
+- Functional Prototype QA: PASS
+- Final QA: **BLOCKED — documentation consistency**
 - Freeze: NOT FROZEN
+- Canonicalization: NOT AUTHORIZED
 
-## QA result
+## Final QA blocker
 
-`CC-FQ-01` through `CC-FQ-10` passed by direct inspection of the Figma prototype construction, component instances, conditional field states, validation state, route containment, terminal states, forbidden-action audit, and protected-node integrity.
+The repository contains a documentation-state mismatch:
 
-All prototype routes remain within the dedicated QA page. External route count is zero.
+- `V1_3_APPROVAL.md` records v1.3 as approved and implementation-authorized.
+- `ARCHITECTURE_V1_3_PROPOSAL.md` still says `PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED`.
+- `FIELD_SPECIFICATION_V1_3.md` still says `PROPOSED — RECONCILED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED` and retains stale pre-implementation gate language.
 
-The inherited nested Functional Select Field trigger was removed from QA clones so the harness does not retain the old prototype destination. Shared component definitions remain unchanged.
+This does not indicate a Figma architecture failure. It is a repository documentation synchronization blocker.
 
 ## Protected boundaries
 
-The following remain protected and untouched:
+The following remain protected:
 
 - `207:1291`
-- `220:1294`
-
-The QA harness is non-canonical and must not be treated as the production implementation.
+- `220:1294` remains the canonical Clinical Closure frame and is not to be silently replaced by the QA harness.
 
 ## Governance
 
-The v1.3 approval authorizes only the bounded QA construction documented in `V1_3_APPROVAL.md` and `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION.md`.
+The QA harness is non-canonical. Functional QA passing does not by itself authorize canonicalization or freeze.
 
-The harness must not introduce backend behavior, automatic Shared Visit mutation, Treatment Planning mutation, Performed Procedure creation, Clinical Record History creation, scheduling, queue behavior, or `Close Visit` behavior.
+No backend behavior, automatic Shared Visit mutation, Treatment Planning mutation, Performed Procedure creation, Clinical Record History creation, scheduling, queue behavior, or `Close Visit` behavior is authorized by the QA harness.
 
-Canonicalization, Final QA, and freeze require separate explicit authorization.
+## Required next step
+
+1. Reconcile the status/gate language in `ARCHITECTURE_V1_3_PROPOSAL.md`.
+2. Reconcile the status/gate language in `FIELD_SPECIFICATION_V1_3.md`.
+3. Re-run `FINAL_QA_V1_3.md` as a read-only consistency check.
+4. Only after Final QA passes should canonicalization/freeze be considered under separate explicit authorization.
