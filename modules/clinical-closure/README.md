@@ -2,19 +2,19 @@
 
 ## Status
 
-**v1.3 APPROVED — FUNCTIONAL QA PASS — FINAL QA BLOCKED BY DOCUMENTATION DRIFT**
+**v1.3 APPROVED — FUNCTIONAL QA PASS — FINAL QA PASS**
 
 ## Current source artifacts
 
-- `ARCHITECTURE.md` — APPROVED architecture baseline
-- `ARCHITECTURE_V1_3_PROPOSAL.md` — v1.3 source; **status text requires reconciliation to approved state**
-- `FIELD_SPECIFICATION_V1_3.md` — v1.3 source; **status text requires reconciliation to approved state**
+- `ARCHITECTURE.md` — approved architecture baseline
+- `ARCHITECTURE_V1_3_PROPOSAL.md` — v1.3 authoritative architecture; approved and implementation-reconciled
+- `FIELD_SPECIFICATION_V1_3.md` — v1.3 authoritative field specification; approved and reconciled
 - `V1_3_APPROVAL.md` — approval and bounded implementation authorization
-- `CROSS_MODULE_DEPENDENCY_AUDIT_V1_3.md` — PASS with historical documentation-alignment note
+- `CROSS_MODULE_DEPENDENCY_AUDIT_V1_3.md` — PASS
 - `FIGMA_PREFLIGHT_V1_3_RERUN.md` — PASS / implementation-ready
 - `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION.md` — QA construction specification
 - `FUNCTIONAL_PROTOTYPE_QA_V1_3_CONSTRUCTION_REPORT.md` — construction report
-- `FINAL_QA_V1_3.md` — current final QA result
+- `FINAL_QA_V1_3.md` — **FINAL QA PASS**
 
 ## Figma state
 
@@ -23,36 +23,40 @@
 - QA page: `Clinical Closure — v1.3 — Functional QA` (`356:1197`)
 - Dedicated QA harness: CONSTRUCTED
 - Functional Prototype QA: PASS
-- Final QA: **BLOCKED — documentation consistency**
+- Structural / Visual QA: PASS
+- Final QA: **PASS**
 - Freeze: NOT FROZEN
-- Canonicalization: NOT AUTHORIZED
-
-## Final QA blocker
-
-The repository contains a documentation-state mismatch:
-
-- `V1_3_APPROVAL.md` records v1.3 as approved and implementation-authorized.
-- `ARCHITECTURE_V1_3_PROPOSAL.md` still says `PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED`.
-- `FIELD_SPECIFICATION_V1_3.md` still says `PROPOSED — RECONCILED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED` and retains stale pre-implementation gate language.
-
-This does not indicate a Figma architecture failure. It is a repository documentation synchronization blocker.
+- Canonicalization: NOT YET AUTHORIZED
 
 ## Protected boundaries
 
 The following remain protected:
 
 - `207:1291`
-- `220:1294` remains the canonical Clinical Closure frame and is not to be silently replaced by the QA harness.
+- `220:1294` remains the canonical Clinical Closure frame and is not replaced by the QA harness.
 
 ## Governance
 
-The QA harness is non-canonical. Functional QA passing does not by itself authorize canonicalization or freeze.
+Final QA PASS confirms repository/design/QA consistency. It does not itself authorize canonicalization, production/backend implementation, automatic Shared Visit mutation, Treatment Planning mutation, Performed Procedure creation, Clinical Record History creation, scheduling, queue behavior, or `Close Visit` behavior.
 
-No backend behavior, automatic Shared Visit mutation, Treatment Planning mutation, Performed Procedure creation, Clinical Record History creation, scheduling, queue behavior, or `Close Visit` behavior is authorized by the QA harness.
+Canonicalization and freeze require separate explicit authorization.
 
-## Required next step
+## Gate state
 
-1. Reconcile the status/gate language in `ARCHITECTURE_V1_3_PROPOSAL.md`.
-2. Reconcile the status/gate language in `FIELD_SPECIFICATION_V1_3.md`.
-3. Re-run `FINAL_QA_V1_3.md` as a read-only consistency check.
-4. Only after Final QA passes should canonicalization/freeze be considered under separate explicit authorization.
+```text
+Architecture approval             PASS
+Field specification               PASS
+Cross-module audit                PASS
+Figma preflight                   PASS
+Implementation authorization      PASS
+Functional QA construction        PASS
+Functional Prototype QA           PASS
+Structural / Visual QA            PASS
+Documentation reconciliation     PASS
+FINAL QA                          PASS
+Canonicalization / Freeze         NOT YET AUTHORIZED
+```
+
+## Next gate
+
+**Canonicalization / Freeze Authorization**
