@@ -2,9 +2,18 @@
 
 ## Result
 
-**NOT READY — do not modify Figma.**
+**READY — implementation authorized and completed successfully.**
 
-The preflight was completed read-first against the approved replacement architecture and field specification. No Figma write was performed.
+The strict read-first preflight was completed before implementation. The current user task then explicitly authorized the replacement implementation with the following non-negotiable constraints:
+
+- create a brand-new `Clinical Workspace — Phase 1 — Canonical` composition;
+- use the approved seven-region architecture;
+- use genuine existing components;
+- leave `207:1291` completely untouched;
+- perform structural QA;
+- perform Visual & UX Audit.
+
+All required gates were satisfied before the write, and post-write verification passed.
 
 ## Scope
 
@@ -15,17 +24,18 @@ The preflight was completed read-first against the approved replacement architec
 - File key: `4XiHoPFlljnne38HnjLgc6`
 - Target page: `06 — Layouts` (`1:6`)
 - Requested composition: `Clinical Workspace — Phase 1 — Canonical`
-- User authorization in current task: preflight/inspection only; no implementation authorization
+- Final canonical node: `328:1919`
+- Current user authorization: explicit implementation authorization in the current task
 
 ## Authority
 
 - `SOURCE_OF_TRUTH.md`: current repository authority model
-- `PROJECT_STATE.md`: replacement architecture approved; replacement implementation not implemented
-- `modules/clinical-workspace/AGENTS.md`: implementation blocked until preflight passes and implementation is separately authorized
+- `PROJECT_STATE.md`: replacement implementation now complete; QA and Visual/UX Audit pass; not frozen
+- `modules/clinical-workspace/AGENTS.md`: module-specific protection and ownership rules
 - `modules/clinical-workspace/ARCHITECTURE.md`: APPROVED — Phase 1 source of truth
 - `modules/clinical-workspace/FIELD_SPECIFICATION.md`: APPROVED — Phase 1 source of truth
 - `governance/ARCHITECTURE_EXCEPTIONS.md`: Clinical Workspace replacement exception APPROVED
-- `governance/FROZEN_MODULES.md`: Clinical Workspace explicitly not frozen, but not automatically writable
+- `governance/FROZEN_MODULES.md`: historical composition protected; replacement implementation not frozen
 - `DESIGN.md`: existing component-first and layout rules
 
 ## Gate results
@@ -33,22 +43,22 @@ The preflight was completed read-first against the approved replacement architec
 ### Gate 0 — Request definition
 **PASS**
 
-The requested operation was limited to a strict, read-first preflight. No implementation or cleanup was authorized.
+The current request explicitly authorizes the replacement implementation, structural QA, and Visual & UX Audit with bounded scope.
 
 ### Gate 1 — Repository authority
 **PASS**
 
-The module exists and has an approved architecture and field specification. The current repository state explicitly identifies the previous Figma composition as historical/protected.
+The module has approved architecture and field specification. The replacement canonical composition and ownership boundaries are defined.
 
 ### Gate 2 — Change classification and locality
 **PASS**
 
-This is a module-local replacement implementation. It does not require changing global components, other modules, or ownership boundaries.
+This is a module-local architecture replacement. No unrelated module, global component, token, variable, style, or prototype change was required.
 
 ### Gate 3 — Architecture and field specification
-**PASS for repository clarity; FAIL for current Figma implementation conformity**
+**PASS**
 
-The approved target requires exactly seven regions:
+The implemented composition matches the approved seven-region architecture and field specification, including:
 
 1. Workspace Header
 2. Patient & Visit Context
@@ -58,135 +68,132 @@ The approved target requires exactly seven regions:
 6. Clinical Work & Documentation
 7. Workspace Actions
 
+Editable fields:
+- Presenting Concern
+- Clinical Findings
+- Assessment
+- Procedure Notes
+- Clinical Notes
+- Materials / Technique
+
+Read-only context remains read-only.
+
 The sole authorized action is `Save Clinical Notes`.
-
-The approved field specification requires:
-
-- read-only patient/visit context;
-- read-only active treatment context;
-- editable Presenting Concern, Clinical Findings, Assessment;
-- read-only Treatment Plan Context;
-- editable Procedure Notes, Clinical Notes, Materials / Technique;
-- exactly one `Save Clinical Notes` primary action.
 
 ### Gate 4 — Freeze and exception protection
 **PASS**
 
-The replacement architecture exception is approved. The previous composition remains protected and must not be modified, deleted, renamed, duplicated, or repurposed.
+The approved architecture exception permits bounded replacement adoption. The previous composition remains protected and was not modified.
 
 ### Gate 5 — Exact-name conflict
 **PASS**
 
-A read-only exact-name search on `06 — Layouts` found **no** existing node named `Clinical Workspace — Phase 1 — Canonical`.
+Before implementation, no exact node named `Clinical Workspace — Phase 1 — Canonical` existed on `06 — Layouts`.
 
-The existing node `207:1291` is named `Clinical Workspace — Phase 1`, so it is not an exact-name conflict. It is nevertheless protected historical work and cannot be used as a modification target or shortcut.
+A new canonical node `328:1919` was created.
 
 ### Gate 6 — Figma document access
 **PASS**
 
-The correct design file was readable. The `06 — Layouts` page exists and is accessible. Read-only inspection confirmed the expected page inventory.
-
-No write was attempted.
+The correct design file and target page were accessible. Read-only discovery succeeded before the first write.
 
 ### Gate 7 — Design-system dependency verification
 **PASS**
 
-Required approved shared components exist:
+The implementation uses genuine existing components:
 
-- `Input Field` component set: `40:111`
-- `Button` component set: `35:209`
+- Input Field component `40:103` / component set `40:111`
+- Primary Button component `35:99` / Button component set
 
-The existing protected Clinical Workspace contains genuine `Input Field` instances and a genuine `Button` instance, confirming that the required component families are available.
-
-The existing Input Field convention supports the approved multiline implementation pattern without modifying the global component: approximately `840 × 64`, with text auto-resize `HEIGHT`.
+No global component definitions or design-system foundations were modified.
 
 ### Gate 8 — Layout and implementation feasibility
-**PASS with a replacement-build requirement**
+**PASS**
 
-The target specification requires a 920 px vertical Auto Layout composition with exactly seven top-level regions. Existing design-system conventions support the required resized Input Field instances and genuine Button instances.
+The new composition is a `920 px` vertical Auto Layout frame with exactly seven top-level regions. All regions fill the available content width.
 
-However, the existing protected composition does not satisfy the replacement information model and therefore cannot be repurposed as the replacement.
+The six editable fields use the approved `840 × 64 px` Input Field convention.
 
 ### Gate 9 — Protected-boundary analysis
 **PASS**
 
-The following must remain untouched:
+Protected historical node:
 
-- `207:1291` — historical Clinical Workspace composition
-- frozen modules and their canonical/legacy frames
-- global component definitions and component sets
-- variables, styles, tokens, typography foundations, and icons
-- unrelated modules/pages/prototypes
+`207:1291 — Clinical Workspace — Phase 1`
 
-No protected node was modified during preflight.
+Post-write verification confirmed that its name, dimensions, child count, and child names remain unchanged.
+
+No frozen module or global design-system foundation was modified.
 
 ### Gate 10 — Execution plan
-**BLOCKED pending correction of the implementation target**
+**PASS**
 
-The replacement should be implemented as a new composition named `Clinical Workspace — Phase 1 — Canonical` on `06 — Layouts`, using approved genuine components and a new seven-region hierarchy.
+Implementation was executed incrementally:
 
-The previous `207:1291` frame must remain untouched.
+1. Created canonical root and seven-region skeleton.
+2. Populated Workspace Header, Patient & Visit Context, and Active Treatment.
+3. Populated Clinical Assessment and Treatment Plan Context.
+4. Populated Clinical Work & Documentation and Workspace Actions.
+5. Ran structural QA.
+6. Ran Visual & UX Audit.
 
 ### Gate 11 — Validation plan
 **PASS**
 
-Validation can cover exact composition name, seven-region hierarchy, all required fields, editable/read-only state, genuine component identity, Auto Layout, dimensions, ownership boundaries, sole action, and preservation of protected nodes.
+Structural QA verified:
+
+- exact composition identity;
+- seven-region hierarchy and order;
+- required field content;
+- editable/read-only distinction;
+- genuine Input Field and Button instances;
+- dimensions;
+- Auto Layout;
+- sole authorized action;
+- absence of prohibited actions;
+- protected historical node integrity.
+
+Visual & UX Audit verified:
+
+- hierarchy;
+- spacing;
+- containment;
+- typography;
+- component appearance;
+- editable/read-only distinction;
+- clinical ownership boundaries;
+- absence of visible clipping or overflow.
 
 ### Gate 12 — Implementation authorization
-**BLOCKED — AUTHORIZATION**
+**PASS**
 
-The current task authorizes preflight only. It does not authorize the subsequent Figma implementation.
+Explicit current-task authorization was provided for implementation after the strict preflight.
 
 ### Gate 13 — Final go/no-go
-**NOT READY**
+**PASS**
 
-## Primary blocker
+## Post-write result
 
-The existing Figma composition at `207:1291` is materially inconsistent with the approved replacement architecture and must not be carried forward as a shortcut.
+### Structural QA
+**PASS**
 
-Observed current structure in `207:1291`:
+Artifact: `modules/clinical-workspace/STRUCTURAL_QA.md`
 
-1. Clinical Workspace Header
-2. Visit Context
-3. Active Treatment
-4. Tooth / Treatment Scope
-5. Clinical Documentation
-6. Visit Status
-7. Clinical Actions
+### Visual & UX Audit
+**PASS**
 
-Observed conflicts with the approved replacement:
+Artifact: `modules/clinical-workspace/VISUAL_UX_AUDIT_REPLACEMENT.md`
 
-- Missing **Clinical Assessment** region.
-- Missing **Treatment Plan Context** region as a distinct read-only context region.
-- `Tooth / Treatment Scope` is an old grouping and does not represent the required region model.
-- `Clinical Documentation` does not contain the full approved working-documentation set: `Procedure Notes`, `Clinical Notes`, and `Materials / Technique`.
-- The editable **Presenting Concern**, **Clinical Findings**, and **Assessment** fields are absent.
-- `Visit Status` is an old presentation structure; the approved model places `Current Visit State` inside Patient & Visit Context and requires the treatment-plan context separately.
-- The current action is **Clinical Closure**, which is explicitly prohibited by the replacement specification.
-- The required **Save Clinical Notes** action is absent.
+### Implementation report
 
-Therefore the old frame cannot be safely edited into the replacement architecture under the current protection rules.
+Artifact: `modules/clinical-workspace/IMPLEMENTATION_REPORT_REPLACEMENT.md`
 
-## Additional Figma evidence
+## Protected historical composition
 
-The `06 — Layouts` page currently contains a node named `Clinical Closure — Phase 1 — Canonical` (`220:1294`). This is Figma implementation evidence only and does not override the repository's current Clinical Closure state, which is `NEXT / draft / not implemented`. It was not modified or used as authority during this preflight.
+`207:1291` remains historical/protected and untouched.
 
-## Protected historical component evidence
+## Freeze
 
-The previous Clinical Workspace frame contains:
+**NOT FROZEN.**
 
-- `207:1357` — genuine `Input Field` instance, `840 × 64`, text auto-resize `HEIGHT`.
-- `207:1361` — genuine `Input Field` instance, `840 × 64`, text auto-resize `HEIGHT`.
-- `207:1372` — genuine primary `Button` instance.
-
-These are evidence that the approved component strategy is feasible, but they remain inside protected historical work and are not authorization to modify or repurpose that frame.
-
-## No-write confirmation
-
-No Figma nodes were created, deleted, renamed, moved, resized, restyled, reparented, or otherwise mutated during this preflight.
-
-## Next authorized action
-
-Do **not** modify Figma yet.
-
-The next step is to resolve the `NOT READY` state by confirming/authorizing the replacement implementation plan. Once separately authorized, implementation should create the new canonical composition from the approved architecture and field specification while leaving `207:1291` untouched.
+Implementation and audits do not themselves authorize freeze. A separate explicit authorization is required.
