@@ -14,11 +14,27 @@ It is not the source of truth for the replacement implementation.
 ## Replacement readiness
 - Architecture: APPROVED
 - Field Specification: APPROVED
-- Figma pre-flight: NOT STARTED
+- Figma pre-flight: COMPLETE — NOT READY
 - Replacement implementation: NOT IMPLEMENTED
 - Structural QA: NOT STARTED
 - Visual & UX Audit: NOT STARTED
 - Freeze: NOT READY
 
+## Preflight result
+The strict read-first Figma preflight is recorded at `modules/clinical-workspace/FIGMA_PREFLIGHT.md`.
+
+Result: `NOT READY — do not modify Figma.`
+
+Primary findings:
+- The existing protected composition `207:1291` does not conform to the replacement seven-region architecture.
+- The existing composition contains the prohibited `Clinical Closure` action instead of the authorized `Save Clinical Notes` action.
+- The required Clinical Assessment and Treatment Plan Context regions are absent from the existing composition.
+- The required editable assessment fields are absent.
+- The required Materials / Technique working-documentation field is absent.
+- The replacement implementation must be created as a new canonical composition; `207:1291` must remain untouched.
+- The current task authorized preflight only; implementation requires separate authorization.
+
 ## Required next step
-Run the strict Clinical Workspace Phase 1 Figma pre-flight against the replacement architecture and field specification. No Figma changes are authorized by this status file.
+Do not modify Figma. Confirm/authorize the replacement implementation plan, then run the implementation only against the approved architecture and field specification, followed by structural QA and Visual & UX Audit.
+
+No Figma changes are authorized by this status file.
