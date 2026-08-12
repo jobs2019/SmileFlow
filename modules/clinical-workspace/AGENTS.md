@@ -4,9 +4,14 @@
 These rules apply to Clinical Workspace and its descendants.
 
 ## Current state
-Clinical Workspace has an approved replacement architecture and field specification, but the replacement Figma implementation is NOT IMPLEMENTED and preflight has NOT STARTED.
+Clinical Workspace replacement architecture and field specification are APPROVED.
 
-The previous Clinical Workspace Figma composition is protected historical work.
+The replacement Figma implementation is COMPLETE, structurally QA'd, visually/UX audited, and FROZEN.
+
+Canonical composition:
+`Clinical Workspace — Phase 1 — Canonical` (`328:1919`)
+
+The previous Clinical Workspace Figma composition `207:1291` is protected historical work and remains untouched.
 
 ## Ownership
 Clinical Workspace owns active clinical work and current clinical documentation within its approved Phase 1 boundary.
@@ -24,10 +29,20 @@ Sole authorized action: `Save Clinical Notes`.
 
 Insurance is excluded.
 
-## Implementation gate
-Do not modify Figma until the strict Clinical Workspace preflight passes and implementation is separately authorized.
+## Freeze
+The canonical replacement composition `328:1919` is FROZEN.
 
-Do not modify, delete, rename, duplicate, or repurpose the previous Clinical Workspace composition as a shortcut.
+Any future modification requires:
+1. an explicit Architecture Exception;
+2. applicable implementation authorization; and
+3. re-validation through structural QA and Visual & UX Audit before any re-freeze.
+
+Do not modify the frozen canonical composition without satisfying those requirements.
+
+## Protected historical composition
+Do not modify, delete, rename, duplicate, or repurpose `207:1291` as a shortcut.
+
+It remains historical/protected regardless of future replacement work.
 
 ## Ownership boundaries
 Do not introduce Treatment Planning editing, Dental Chart editing, Clinical Closure controls, Performed Procedure editing, Clinical Record History editing, billing, or insurance workflows into Clinical Workspace unless the approved architecture explicitly changes.
@@ -36,4 +51,4 @@ Do not introduce Treatment Planning editing, Dental Chart editing, Clinical Clos
 Reuse approved existing SmileFlow components as genuine instances. Do not modify global components, variants, variables, styles, tokens, or typography foundations as a side effect.
 
 ## Safety
-If authorization, specification, ownership, exact-name, component, or preflight requirements are unresolved, stop and report `NOT READY — do not modify Figma.`
+If authorization, specification, ownership, exact-name, component, or freeze requirements are unresolved, stop and report `NOT READY — do not modify Figma.`
