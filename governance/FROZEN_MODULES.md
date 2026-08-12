@@ -9,7 +9,6 @@ A frozen module may only be changed after an explicit Architecture Exception is 
 - Patient Registration — FROZEN
 - Dental Chart — Phase 1 — Canonical — FROZEN
 - Treatment Planning — Phase 1 — Canonical (`198:1290`) — FROZEN
-- Clinical Closure — Phase 1 — Canonical (`220:1294`) — FROZEN
 - Shared Visit — Phase 1 — Canonical (`256:1303`) — FROZEN
 - Performed Procedure — Phase 1 — Canonical (`260:2`) — FROZEN
 - Clinical Record History — Phase 1 (`153:1204`) — FROZEN
@@ -20,6 +19,7 @@ A frozen module may only be changed after an explicit Architecture Exception is 
 
 ## Explicitly not frozen
 - Clinical Workspace — replacement architecture approved; replacement implementation not yet authorized for Figma
+- Clinical Closure — next module; architecture is draft for approval and implementation is not authorized
 
 ## Freeze rule
 The absence of a module from the frozen registry does not grant permission to modify it. Architecture, field specification, project state, and explicit user authorization still govern changes.
