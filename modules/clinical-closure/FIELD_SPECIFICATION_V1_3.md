@@ -2,9 +2,9 @@
 
 ## Status
 
-**PROPOSED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED**
+**PROPOSED — RECONCILED — NOT APPROVED — NO FIGMA WRITE AUTHORIZED**
 
-This specification translates the proposed Clinical Closure v1.3 architecture into exact field-level behavior. It preserves the approved Option A lifecycle and the v1.2 canonical implementation as the protected baseline.
+This specification translates the proposed Clinical Closure v1.3 architecture into exact field-level behavior. It incorporates the authoritative reconciliation decision for Actual Work / Procedure and preserves the approved Option A lifecycle and the v1.2 canonical implementation as the protected baseline.
 
 No Figma modification, component modification, production runtime behavior, database implementation, or automatic cross-module mutation is authorized by this document alone.
 
@@ -162,15 +162,29 @@ This region establishes the planned/reference context and, where necessary, conc
 | Treatment Status | `Treatment Status` | Read-only | Yes | Treatment Planning |
 | Plan Status | `Plan Status` | Read-only | Yes | Treatment Planning |
 
-## 7.2 Actual-work fields
+## 7.2 Actual-work fields — reconciled rule
 
 These fields are closure documentation, not a replacement Performed Procedure editor.
 
-| Field | Exact label | Mode | Required | Conditional |
+**Authoritative rule:**
+
+> `Actual Work / Procedure` is required only when clinical work was actually performed or when authoritative Performed Procedure data exists and is being referenced. It is not required when no clinical work occurred.
+
+| Field | Exact label | Mode | Requirement | Conditional |
 |---|---|---|---|---|
-| Actual Work / Procedure | `Actual Work / Procedure` | Editable or reference-populated | Yes for useful closure record | All outcomes |
-| Actual Tooth / Site | `Actual Tooth / Site` | Editable or reference-populated | When clinically relevant | All outcomes where site applies |
-| Actual Surface / Scope | `Actual Surface / Scope` | Editable or reference-populated | When clinically relevant | All outcomes where scope applies |
+| Actual Work / Procedure | `Actual Work / Procedure` | Editable or reference-populated | Required when work occurred; otherwise not required | Outcome/work dependent |
+| Actual Tooth / Site | `Actual Tooth / Site` | Editable or reference-populated | Required when clinically relevant to recorded work | Work/site dependent |
+| Actual Surface / Scope | `Actual Surface / Scope` | Editable or reference-populated | Required when clinically relevant to recorded work | Work/scope dependent |
+
+### Outcome-specific Actual Work rule
+
+| Outcome | Actual Work / Procedure |
+|---|---|
+| Completed as Planned | Required/reference-populated |
+| Completed with Modification | Required/reference-populated |
+| Not Completed — no clinical work occurred | Not required |
+| Not Completed — partial clinical work occurred | Required/reference-populated |
+| Treatment Continues | `Completed Today / Current Work Summary` is required; reference authoritative Performed Procedure data where available |
 
 ### Duplication rule
 
@@ -490,7 +504,7 @@ A future user-facing Close Visit command requires a separate approved interactio
 Core:
 
 - Closure Outcome
-- Actual Work / Procedure, when not reference-populated
+- Actual Work / Procedure, when work occurred and not reference-populated
 - Actual Tooth / Site, when applicable and not reference-populated
 - Actual Surface / Scope, when applicable and not reference-populated
 - Clinical Closure Summary
@@ -619,7 +633,8 @@ The next planned procedure/step may be documented when known, but automatic sche
 |---|---|---|
 | Completed as Planned | Actual Work / Procedure; Clinical Closure Summary; Provider; Closure Date / Time | Actual site/scope; Patient Tolerance; Complications / Exceptions |
 | Completed with Modification | Actual Work / Procedure; Modification Classification; Modification Reason; Summary; Provider; Date / Time | Actual site/scope; Patient Tolerance; Complications / Exceptions |
-| Not Completed | Not Completed Reason; Summary; Provider; Date / Time | Actual partial work; Patient Tolerance; Complications / Exceptions; Next Step / Follow-up when applicable |
+| Not Completed — no clinical work | Not Completed Reason; Summary; Provider; Date / Time | Patient Tolerance; Complications / Exceptions; Next Step / Follow-up when applicable |
+| Not Completed — partial clinical work | Not Completed Reason; Actual Work / Procedure; Summary; Provider; Date / Time | Actual site/scope; Patient Tolerance; Complications / Exceptions; Next Step / Follow-up when applicable |
 | Treatment Continues | Completed Today / Current Work Summary; Remaining Treatment / Continuation Context; Summary; Provider; Date / Time | Next Planned Procedure / Next Step; Actual site/scope; Patient Tolerance; Complications / Exceptions |
 
 ---
