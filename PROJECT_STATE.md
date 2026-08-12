@@ -11,11 +11,10 @@
 8. Clinical Workspace — Phase 1 — Canonical
 
 ## Clinical Workspace — architecture replacement
-Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception was authorized to replace/update its source of truth with the newly approved Clinical Workspace Phase 1 architecture and field specification.
+Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception was authorized to replace/update its source of truth with the approved Clinical Workspace Phase 1 architecture and field specification.
 
 Architecture Exception: APPROVED
-Previous frozen source: `modules/clinical-workspace/ARCHITECTURE.md` and `modules/clinical-workspace/FIELD_SPECIFICATION.md`
-Replacement source of truth: current approved files at the same paths
+Replacement source of truth: current approved files at `modules/clinical-workspace/ARCHITECTURE.md` and `modules/clinical-workspace/FIELD_SPECIFICATION.md`
 
 ## Clinical Workspace — replacement implementation
 Architecture: APPROVED
@@ -25,7 +24,6 @@ Figma file: SmileFlow Foundations v1.0
 Figma file key: `4XiHoPFlljnne38HnjLgc6`
 Figma page: `06 — Layouts` (`1:6`)
 Canonical node: `328:1919`
-Recommended width: 920 px
 
 Replacement Figma implementation: COMPLETE
 Figma pre-flight: PASS
@@ -66,15 +64,9 @@ The previous composition was not modified, deleted, renamed, duplicated, or repu
 
 Status: IMPLEMENTED — FINAL.
 
-## Clinical Closure — approved specification / not implemented
+## Clinical Closure — Phase 1 canonical implementation
 Architecture: APPROVED
-Field Specification: APPROVED — Phase 1 source of truth
-Implementation: NOT IMPLEMENTED
-Figma preflight: NOT STARTED
-Structural QA: NOT STARTED
-Visual/UX Audit: NOT STARTED
-Freeze: NOT FROZEN
-
+Field Specification: APPROVED
 Canonical composition: `Clinical Closure — Phase 1 — Canonical`
 Recommended width: 920 px
 Exactly seven regions are required.
@@ -99,9 +91,21 @@ Authorized actions:
 
 No automatic cross-module transition is authorized in Phase 1.
 
-The approved field specification does not itself authorize a Figma write. The SmileFlow Figma Preflight protocol and explicit implementation authorization are required before implementation.
+Implementation: COMPLETE
+Figma preflight: PASS
+Structural QA: PASS
+Visual/UX Audit: PASS
+Final QA: PASS
+Freeze: NOT FROZEN
 
-If implementation reveals a material problem with the approved contract, stop and return to repository-level brainstorming/revision rather than silently changing the approved specification or improvising behavior in Figma.
+Repository implementation evidence:
+- `modules/clinical-closure/FINAL_ACCEPTANCE_V1.md`
+- `modules/clinical-closure/FINAL_QA_V1.1.md`
+- `modules/clinical-closure/INTERACTION_VALIDATION_V1.md`
+- `modules/clinical-closure/CANONICAL_VERIFICATION_V1.md`
+- `modules/clinical-closure/IMPLEMENTATION_REPORT_V1_CONSTRUCTION.md`
+
+The Phase 1 implementation is complete and should be treated as the current canonical implementation. No further Figma modification is authorized unless a new explicit implementation task/authorization or Architecture Exception is established.
 
 ## Shared Visit
 Architecture: APPROVED
@@ -115,27 +119,30 @@ Freeze: FROZEN
 Canonical composition: `256:1303`
 
 ## Performed Procedure
-Architecture: APPROVED
-Field Specification: APPROVED
-Implementation: COMPLETE
-Visual/UX Audit: PASS
-Freeze: FROZEN
+Repository state: COMPLETE / FROZEN per current project ledger and frozen registry.
 Canonical composition: `260:2`
+Implementation: COMPLETE
+Freeze: FROZEN
+
+Repository documentation is currently minimal (`AGENTS.md` only in the module directory). This is a documentation completeness issue, not authorization to modify Figma. Before any future work involving this module, its authoritative architecture/field specification and implementation evidence should be reconciled or restored.
 
 ## Clinical Record History
-Architecture: APPROVED
-Field Specification: APPROVED
-Implementation: COMPLETE
-Visual/UX Audit: PASS
-Freeze: FROZEN
+Repository state: COMPLETE / FROZEN per current project ledger and frozen registry.
 Canonical composition: `153:1204`
+Implementation: COMPLETE
+Freeze: FROZEN
+
+Repository documentation is currently minimal (`AGENTS.md` only in the module directory). This is a documentation completeness issue, not authorization to modify Figma. Before any future work involving this module, its authoritative architecture/field specification and implementation evidence should be reconciled or restored.
 
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
 - The Clinical Workspace replacement exception was explicitly authorized for source-of-truth replacement and bounded Figma adoption.
-- Clinical Workspace replacement implementation and audits are complete and the canonical replacement is now frozen.
-- Clinical Closure has an approved Phase 1 architecture and field specification but is not authorized for Figma implementation until preflight and explicit implementation authorization are complete.
+- Clinical Workspace replacement implementation and audits are complete and the canonical replacement is frozen.
+- Clinical Closure Phase 1 is implemented, validated, canonical, and not frozen.
 - No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
+- Clinical Closure is not automatically authorized for additional Figma modification merely because it is not frozen; any new change still requires the normal repository interpretation, preflight, and explicit implementation authorization gates.
 
-## Next step
-Clinical Closure Phase 1 — run strict read-first Figma Preflight. Do not modify Figma until preflight passes and implementation is explicitly authorized.
+## Current next step
+Repository state is reconciled for the completed Clinical Closure and Clinical Workspace work. Before selecting the next module for implementation, perform a targeted documentation/readiness inspection of Performed Procedure and Clinical Record History because their module directories currently contain only `AGENTS.md` while the project ledger and frozen registry identify them as complete/frozen.
+
+No Figma modification is authorized by this reconciliation.
