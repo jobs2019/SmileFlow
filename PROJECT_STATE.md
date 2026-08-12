@@ -9,6 +9,7 @@
 6. Performed Procedure — Phase 1 — Canonical
 7. Clinical Record History — Phase 1
 8. Clinical Workspace — Phase 1 — Canonical
+9. Clinical Closure — Phase 1 — Canonical
 
 ## Clinical Workspace — architecture replacement
 Previous Clinical Workspace Phase 1 was marked frozen in the prior project state. An explicit architecture exception was authorized to replace/update its source of truth with the approved Clinical Workspace Phase 1 architecture and field specification.
@@ -49,12 +50,6 @@ Status: HISTORICAL / PROTECTED / UNTOUCHED
 
 The previous composition was not modified, deleted, renamed, duplicated, or repurposed during replacement implementation or freeze verification.
 
-## Clinical Workspace — validation artifacts
-- Implementation: `modules/clinical-workspace/IMPLEMENTATION_REPORT_REPLACEMENT.md`
-- Structural QA: `modules/clinical-workspace/STRUCTURAL_QA.md`
-- Visual & UX Audit: `modules/clinical-workspace/VISUAL_UX_AUDIT_REPLACEMENT.md`
-- Preflight: `modules/clinical-workspace/FIGMA_PREFLIGHT.md`
-
 ## Design-system dependencies
 ### Functional Select Field v1.2
 - Select Option — `232:1439`
@@ -68,6 +63,7 @@ Status: IMPLEMENTED — FINAL.
 Architecture: APPROVED
 Field Specification: APPROVED
 Canonical composition: `Clinical Closure — Phase 1 — Canonical`
+Canonical node: `220:1294`
 Recommended width: 920 px
 Exactly seven regions are required.
 
@@ -76,36 +72,28 @@ Canonical demonstration state:
 - Treatment Status: `In Progress`
 - Closure Outcome: `Completed as Planned`
 
-Exactly one editable domain field is authorized:
-- `Closure Outcome`
-
-Canonical closure outcomes:
+Exactly four canonical Closure Outcome values:
 1. `Completed as Planned`
 2. `Completed with Modification`
 3. `Not Completed`
 4. `Treatment Continues`
 
-Authorized actions:
-- `Save Closure Outcome`
+Canonical actions:
+- `Save Closure Record`
 - `Cancel`
 
-No automatic cross-module transition is authorized in Phase 1.
+No automatic cross-module transition is authorized by the frozen v1.3 architecture. Runtime/production behavior requires a separate approved interaction contract.
 
 Implementation: COMPLETE
 Figma preflight: PASS
 Structural QA: PASS
 Visual/UX Audit: PASS
+Functional Prototype QA: PASS
 Final QA: PASS
-Freeze: NOT FROZEN
+Freeze: FROZEN
 
-Repository implementation evidence:
-- `modules/clinical-closure/FINAL_ACCEPTANCE_V1.md`
-- `modules/clinical-closure/FINAL_QA_V1.1.md`
-- `modules/clinical-closure/INTERACTION_VALIDATION_V1.md`
-- `modules/clinical-closure/CANONICAL_VERIFICATION_V1.md`
-- `modules/clinical-closure/IMPLEMENTATION_REPORT_V1_CONSTRUCTION.md`
-
-The Phase 1 implementation is complete and should be treated as the current canonical implementation. No further Figma modification is authorized unless a new explicit implementation task/authorization or Architecture Exception is established.
+Canonicalization / Freeze authorization:
+`modules/clinical-closure/CANONICALIZATION_FREEZE_AUTHORIZATION_V1_3.md`
 
 ## Shared Visit
 Architecture: APPROVED
@@ -148,18 +136,22 @@ Verified documentation chain:
 - `modules/clinical-record-history/FIELD_SPECIFICATION.md`
 - `modules/clinical-record-history/SPECIFICATION_CONSISTENCY_AUDIT.md`
 
-The consistency audit passed. The Figma node `153:1204` remains untouched.
+The consistency audit passed. The frozen Figma node `153:1204` remains untouched.
 
 ## Repository / Figma boundary
 - Frozen modules require an explicit Architecture Exception before modification.
 - The Clinical Workspace replacement exception was explicitly authorized for source-of-truth replacement and bounded Figma adoption.
 - Clinical Workspace replacement implementation and audits are complete and the canonical replacement is frozen.
-- Clinical Closure Phase 1 is implemented, validated, canonical, and not frozen.
-- Performed Procedure and Clinical Record History remain frozen; their repository documentation is now reconstructed and consistency-verified, but this does not authorize Figma modification.
+- Clinical Closure v1.3 is implemented, validated, canonicalized, and frozen. Any future modification requires a new versioned change proposal and the normal preflight/authorization/QA sequence.
+- Performed Procedure and Clinical Record History remain frozen; their repository documentation is reconstructed and consistency-verified, but this does not authorize Figma modification.
 - No future Clinical Workspace modification is authorized without a new Architecture Exception and implementation authorization.
-- Clinical Closure is not automatically authorized for additional Figma modification merely because it is not frozen; any new change still requires the normal repository interpretation, preflight, and explicit implementation authorization gates.
+
+## Baseline integration state
+The Phase 1 module baseline is complete and the user has accepted the end-to-end experience walkthrough. Integration implementation is not yet authorized.
+
+Before any cross-module Figma wiring is attempted, perform a read-only integration proposal/dependency audit that identifies the exact routes, ownership boundaries, protected nodes, and prototype-only behavior to be authorized.
 
 ## Current next step
-Repository state reconciliation and documentation recovery for Performed Procedure and Clinical Record History are complete. The repository now has verified documentation chains for both frozen modules. Before selecting any new Figma implementation task, inspect the remaining repository module inventory and dependency/readiness state to identify the actual next unfinished work.
+**SmileFlow Baseline — Integration Proposal & Read-Only Cross-Module Dependency Audit**
 
-No Figma modification is authorized by this reconciliation.
+No Figma modification is authorized by this project-state reconciliation.
