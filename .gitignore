@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Local SmileFlow environment
+.smileflow-local.env
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Build / generated output
+dist/
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Supabase local runtime state
+supabase/.branches/
+supabase/.temp/
+supabase/temp/
