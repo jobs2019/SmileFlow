@@ -1,89 +1,81 @@
-# SmileFlow Baseline — Explicit Integration Implementation Authorization
+# SmileFlow Baseline — Explicit Integration Implementation Authorization v1
 
 ## Status
 
-**AUTHORIZED — BOUNDED PROTOTYPE INTEGRATION ONLY**
+**AUTHORIZED — BOUNDED PROTOTYPE NAVIGATION ONLY**
 
-Date: 2026-08-12
+Date: 2026-08-13
 
 ## Authorization basis
 
-This authorization follows:
+This authorization is reaffirmed by the user's explicit current instruction:
 
-1. SmileFlow Phase 1 baseline completion;
-2. Project-State Reconciliation;
-3. End-to-End Experience Walkthrough and user acceptance;
-4. Repository Integration Readiness Reconciliation;
-5. Baseline Integration Proposal v1;
-6. Read-Only Cross-Module Dependency Audit v1.
+> **Explicit Integration Implementation Authorization**
 
-## Scope
+It follows the completed and passing baseline integration gates:
 
-Authorization is granted to implement the minimum cross-module **Figma prototype navigation** required to make the existing SmileFlow Phase 1 baseline behave as one bounded navigable journey.
+1. `BASELINE_INTEGRATION_PROPOSAL_V1.md`
+2. `BASELINE_CROSS_MODULE_DEPENDENCY_AUDIT_V1.md`
+3. `BASELINE_INT08_CLINICAL_RECORD_HISTORY_RESOLUTION_V1.md`
+4. current `PROJECT_STATE.md`
+5. `governance/FROZEN_MODULES.md`
+6. `governance/FIGMA_PREFLIGHT.md`
 
-This is a prototype-integration authorization only.
+## Authorized scope
 
-It does not authorize production behavior, backend behavior, database/API changes, real persistence, event generation, automatic record creation, or lifecycle mutation.
+Implement exactly these eight bounded prototype-navigation routes:
 
-## Authorized routes
-
-| ID | From | To | Authorization |
+| ID | From | To | Scope |
 |---|---|---|---|
-| INT-01 | Patient Registration | Patient Management | AUTHORIZED |
-| INT-02 | Patient Management | Dental Chart | AUTHORIZED |
-| INT-03 | Patient Management | Shared Visit | AUTHORIZED |
-| INT-04 | Shared Visit | Clinical Workspace | AUTHORIZED |
-| INT-05 | Clinical Workspace | Treatment Planning | AUTHORIZED |
-| INT-06 | Treatment Planning | Performed Procedure | AUTHORIZED |
-| INT-07 | Performed Procedure | Clinical Closure | AUTHORIZED |
-| INT-08 | Clinical Closure | Clinical Record History | AUTHORIZED |
+| INT-01 | Patient Registration | Patient Management | Navigation only |
+| INT-02 | Patient Management | Dental Chart | Navigation only |
+| INT-03 | Patient Management | Shared Visit | Navigation only |
+| INT-04 | Shared Visit | Clinical Workspace | Navigation only |
+| INT-05 | Clinical Workspace | Treatment Planning | Navigation only |
+| INT-06 | Treatment Planning | Performed Procedure | Navigation only |
+| INT-07 | Performed Procedure | Clinical Closure | Navigation only |
+| INT-08 | Clinical Closure | Clinical Record History | Navigation only |
 
-## Route semantics
+## Implementation boundary
 
-All eight routes are navigation-only prototype transitions.
+Integration must be implemented through a dedicated, clearly bounded prototype integration harness/page or equivalent non-canonical integration layer.
 
-Routes may display or carry minimum contextual identifiers needed to represent the destination prototype state, such as Patient ID or Visit ID, but they must not create persistence semantics.
+The implementation must reuse the existing canonical module compositions and genuine approved components. It must not modify the internal composition of frozen modules merely to add routing.
 
-## Explicit prohibitions
+Canonical destinations:
 
-This authorization does NOT permit:
+- Treatment Planning: `198:1290`
+- Shared Visit: `256:1303`
+- Performed Procedure: `260:2`
+- Clinical Record History: `153:1204`
+- Clinical Workspace: `328:1919`
+- Clinical Closure: `220:1294`
 
-- changing Shared Visit Visit State;
-- `Close Visit` behavior;
-- automatic check-in, call, treatment, closure, or visit-state transitions;
-- editing Treatment Planning from another module;
-- automatic Performed Procedure creation;
-- automatic Clinical Record History creation;
-- Dental Chart mutation;
-- scheduling or queue mutation;
-- billing or insurance behavior;
-- backend/API/database implementation;
-- AI-generated clinical content;
-- creation of new fields;
-- creation or modification of shared design-system components;
-- redesign of any canonical module;
-- changes to frozen architectures;
-- Clinical Closure v1.4 changes.
+Protected historical Clinical Workspace node: `207:1291`.
 
-## Module ownership
+## Navigation semantics
 
-Integration must preserve the existing ownership model:
+Routes may display/carry minimum contextual identifiers required for prototype presentation, including Patient ID, Visit ID, and an already-established treatment/procedure context.
 
-- Patient Registration owns registration workflow.
-- Patient Management owns patient-record management.
-- Dental Chart owns its approved chart boundary.
-- Shared Visit remains sole owner of Visit State.
-- Clinical Workspace owns its approved clinical-work surface.
-- Treatment Planning owns planned treatment.
-- Performed Procedure owns actual procedure recording.
-- Clinical Closure owns the closure record.
-- Clinical Record History owns historical presentation.
+This is navigation context only. It does not authorize persistence, API calls, database writes, event generation, automatic record creation, or cross-module synchronization.
 
-Navigation does not transfer ownership.
+## Ownership requirements
+
+- Patient Registration remains the registration boundary.
+- Patient Management remains the patient-management boundary.
+- Dental Chart remains the chart-state boundary.
+- Shared Visit remains the sole owner of Visit State.
+- Clinical Workspace remains responsible for its approved clinical-work surface.
+- Treatment Planning remains the planned-treatment boundary.
+- Performed Procedure remains the actual-procedure boundary.
+- Clinical Closure remains the closure-record boundary.
+- Clinical Record History remains read-only historical presentation.
+
+Navigation never transfers ownership.
 
 ## Protected modules and nodes
 
-The following modules remain read-only during integration:
+The following canonical modules remain protected during integration:
 
 - Patient Management
 - Patient Registration
@@ -93,62 +85,100 @@ The following modules remain read-only during integration:
 - Clinical Workspace
 - Performed Procedure
 - Clinical Record History
+- Clinical Closure
 
-Clinical Closure is currently canonical, Final-QA-passed, and governed by its approved v1.3 architecture/field specification. Its current repository source-of-truth state is **NOT FROZEN**; this integration authorization does not freeze it. The integration may add only the explicitly authorized navigation route to the existing canonical Clinical Closure composition and must not alter its internal architecture, fields, or behavior.
+All are currently recorded as frozen in `governance/FROZEN_MODULES.md`.
 
-No frozen node may be modified, replaced, renamed, or repurposed by this authorization.
+Protected legacy frames remain untouched, including Clinical Workspace `207:1291`.
 
-## Implementation boundary
+No frozen node may be modified, replaced, renamed, repurposed, or used as an integration shortcut.
 
-Integration should be implemented in a dedicated, clearly named **SmileFlow Baseline Integration / Experience** prototype harness or other explicitly bounded integration surface approved by the Figma preflight.
+## Explicit prohibitions
 
-The implementation must reuse the existing canonical module compositions and genuine existing components. It must not create replacement module screens merely to simplify routing.
+This authorization does NOT permit:
 
-Historical/superseded frames must not be used as integration destinations.
+- backend implementation;
+- database changes or migrations;
+- API changes;
+- runtime persistence;
+- automatic Visit State transitions;
+- `Close Visit` behavior;
+- automatic check-in/call/treatment/closure transitions;
+- Treatment Planning mutation from another module;
+- automatic Performed Procedure creation;
+- automatic Clinical Record History creation;
+- Dental Chart mutation;
+- scheduling/queue mutation;
+- billing;
+- HMO/insurance behavior;
+- AI clinical decision behavior;
+- new clinical fields;
+- new design-system components, variants, tokens, variables, or styles;
+- redesign of existing modules;
+- changes to module architecture or field specifications;
+- Clinical Closure v1.4 work;
+- changes to historical/superseded compositions.
 
-## Required pre-write gate
+## Required Figma preflight
 
-Before writing to Figma, the implementation must still satisfy the repository's Figma preflight requirements, including:
+This authorization does not bypass `governance/FIGMA_PREFLIGHT.md`.
 
-- read-first inspection;
-- exact canonical destination verification;
-- exact-name conflict check;
-- component identity verification;
-- protected-node verification;
-- route-boundary verification;
-- no unintended shared-component modification.
+Before any Figma write, a strict read-first preflight must be completed and must end in `READY`.
 
-This authorization does not bypass Figma preflight.
+The preflight must establish:
+
+1. correct Figma file and target page;
+2. exact integration harness/bounded target;
+3. exact eight authorized routes;
+4. canonical destination verification;
+5. exact-name conflict results;
+6. design-system dependencies;
+7. protected boundaries;
+8. incremental execution plan;
+9. structural, behavioral, visual, and protection validation plan;
+10. recovery/rollback approach.
+
+If any mandatory preflight gate fails, stop with:
+
+> `NOT READY — do not modify Figma.`
 
 ## Required QA after implementation
 
-The integration must undergo a dedicated Integration QA covering at minimum:
+Integration QA must verify:
 
 1. INT-01 through INT-08 each reach the intended canonical destination;
 2. no route reaches a historical/superseded composition;
-3. no forbidden state mutation occurs;
-4. Shared Visit remains sole Visit State owner;
-5. no `Close Visit` behavior exists;
-6. no implicit Performed Procedure or Clinical Record History creation occurs;
-7. protected modules/nodes remain untouched;
-8. backward navigation is bounded and intentional;
-9. the complete journey is traversable;
-10. the integrated journey remains consistent with all approved module architectures and field specifications.
+3. no route mutates Visit State;
+4. no `Close Visit` behavior exists;
+5. no implicit downstream record creation occurs;
+6. protected canonical modules remain untouched;
+7. protected legacy frames remain untouched;
+8. no global design-system assets were modified;
+9. back-navigation is bounded and intentional;
+10. the full journey is traversable;
+11. the resulting prototype remains consistent with approved ownership, architecture, and field specifications.
 
-## Freeze impact
+## Stop conditions
 
-This authorization does not freeze any currently open module.
+Stop immediately if implementation requires:
 
-It does not reopen or unfreeze any frozen module.
+- modifying a frozen module;
+- changing architecture or field specifications;
+- adding a shared component or token;
+- modifying global design-system assets;
+- introducing runtime persistence;
+- resolving an unresolved contradiction by guesswork;
+- targeting a historical/superseded node;
+- expanding beyond INT-01 through INT-08.
 
-It does not supersede any module architecture or field specification.
+Such work requires a separate change-control/authorization path.
 
 ## Decision
 
-**IMPLEMENTATION AUTHORIZED — BOUNDED PROTOTYPE INTEGRATION ONLY**
+**IMPLEMENTATION AUTHORIZED — BOUNDED PROTOTYPE NAVIGATION ONLY**
 
-The next task is:
+The next operational step is:
 
-**SmileFlow Baseline — Integration Implementation / Read-First Figma Preflight**
+> **SmileFlow Baseline — Integration Implementation / Read-First Figma Preflight**
 
-No implementation should begin by modifying canonical module internals. The first implementation action is the required read-only Figma preflight for the integration harness and all eight destinations.
+No canonical module internals may be modified as part of this authorization.
