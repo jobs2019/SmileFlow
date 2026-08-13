@@ -26,17 +26,13 @@ If this file conflicts with `PROJECT_STATE.md`, `PROJECT_STATE.md` wins and this
 
 **Default branch:** `main`
 
-**Latest progress commit:** `9e9accb20b42a3ebd041d82c84c07139909fb3cd`
+**Latest project-state commit:** `4bda985d1f36ee9dcefe6ff6fd51268dc0abcdfe`
 
-**Previous application-state commit:** `d5ab9b1c589c7253f3029ca034954f38149ec601` — `Add local Supabase runtime initialization procedure`
-
-**Current authoritative project state:** Phase 1 module baseline complete; cross-module integration implementation is NOT authorized.
+**Current authoritative project state:** Phase 1 module baseline complete; bounded prototype integration is explicitly authorized, subject to a passing Figma preflight.
 
 **Current authorized next step:**
 
-> **SmileFlow Baseline — Integration Proposal & Read-Only Cross-Module Dependency Audit**
-
-Do not skip this gate.
+> **SmileFlow Baseline — Integration Implementation / Read-First Figma Preflight**
 
 ---
 
@@ -79,25 +75,36 @@ Never infer the next task from an old conversation. Read the current repository 
 
 ---
 
-## Phase 2 — Baseline Integration Readiness
+## Phase 2 — Baseline Integration
 
-**Status: IN PROGRESS — IMPLEMENTATION BLOCKED UNTIL GATES PASS**
+**Status: AUTHORIZED — PRE-WRITE PREFLIGHT REQUIRED**
 
-### Current gate
+- [x] Baseline integration proposal
+- [x] Read-only cross-module dependency audit
+- [x] Exact route ownership audit
+- [x] State handoff audit
+- [x] Protected-node audit
+- [x] Prototype-only behavior audit
+- [x] INT-08 Clinical Record History destination resolution
+- [x] Explicit integration implementation authorization
+- [ ] Read-first Figma preflight
+- [ ] Integration implementation
+- [ ] Structural/behavioral/visual integration QA
+- [ ] Protection audit after implementation
 
-- [ ] Integration Proposal
-- [ ] Read-only cross-module dependency audit
-- [ ] Exact route ownership audit
-- [ ] State handoff audit
-- [ ] Protected-node audit
-- [ ] Prototype-only behavior audit
-- [ ] Explicit integration implementation authorization
+### Authorized scope
+
+Exactly eight prototype-navigation routes:
+
+`INT-01 → INT-02 → INT-03 → INT-04 → INT-05 → INT-06 → INT-07 → INT-08`
+
+Implementation must use a dedicated bounded integration harness/page or equivalent non-canonical integration layer.
 
 ### Important
 
 Figma navigation is not runtime persistence.
 
-Do not wire cross-module mutation merely because prototype navigation exists.
+Do not introduce cross-module mutation, backend behavior, database/API changes, lifecycle transitions, billing, HMO/insurance, or AI clinical decision behavior.
 
 ---
 
@@ -319,9 +326,9 @@ Local QA data must remain disposable and isolated.
 
 **STOP HERE until the current authorized gate is completed:**
 
-> **SmileFlow Baseline — Integration Proposal & Read-Only Cross-Module Dependency Audit**
+> **SmileFlow Baseline — Integration Implementation / Read-First Figma Preflight**
 
-Do not begin general runtime implementation or modify frozen Figma modules until the repository's authorization chain says to proceed.
+Do not write to Figma until the preflight result is `READY`.
 
 ---
 
