@@ -126,10 +126,60 @@ No backend, database, API, persistence, lifecycle mutation, billing, HMO/insuran
 
 No canonical frozen module internals may be modified as part of this authorization.
 
+## Phase 2 — database/backend foundation current state
+
+Phase 2 architecture, schema, authentication/authorization, runtime workflow, technology/backend, database/RLS specification, consistency audits, and implementation authorization have been completed.
+
+The database implementation sequence 0001–0009 has been completed and validated. The migration source-of-truth recovery decision selected **Option B — reconstructed baseline**.
+
+Executable local baseline:
+`supabase/migrations/20260813000000_reconstructed_baseline.sql`
+
+### Local development status
+
+- Docker Desktop / Docker Engine: PASS
+- WSL2: PASS
+- Supabase CLI 2.114.0: PASS
+- `npx supabase start`: PASS
+- `npx supabase db reset`: PASS
+- Local PostgreSQL/API/Auth/Storage/Studio: PASS
+- Local Studio: `http://127.0.0.1:54323`
+
+### Local database validation
+
+- 17 public application tables: PASS
+- RLS enabled on the 17 application tables: PASS
+- 44 public RLS policies: PASS
+- Reconstructed baseline executes from a clean local database: PASS
+
+### Recovered local authorization contract
+
+`public.clinic_memberships.role` uses `public.smileflow_role`:
+- `dentist`
+- `dental_assistant`
+- `receptionist`
+- `administrator`
+
+`public.clinic_memberships.status` uses `public.smileflow_membership_status`:
+- `active`
+- `inactive`
+
+No disposable Auth fixtures have been created yet.
+
+Detailed checkpoint and execution plan:
+`PHASE_2_PROGRESS_AND_NEXT_STEPS.md`
+
 ## Current next step
 
-**SmileFlow Baseline — Integration Implementation / Read-First Figma Preflight**
+**SmileFlow Phase 2 — Disposable Local Auth Fixture Setup / RLS Behavioral QA**
 
-Before any Figma write, `governance/FIGMA_PREFLIGHT.md` must be satisfied and the result must be `READY`.
+Before any fixture write, perform the remaining read-only structural check of `public.users` and `public.clinics` so fixture creation uses the exact recovered schema rather than guessed columns/defaults.
 
-If preflight fails, stop with `NOT READY — do not modify Figma.`
+Then:
+1. Create synthetic local-only Auth identities.
+2. Create synthetic Clinic A / Clinic B memberships using the recovered role/status contract.
+3. Execute real Auth-session RLS behavioral tests across clinic and role boundaries.
+4. Complete exact cloud/local schema and policy parity verification.
+5. Document any reconciliation before changing authoritative schema/policy definitions.
+
+Development-only local QA must remain separate from production/cloud data and credentials.
